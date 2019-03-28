@@ -1,0 +1,526 @@
+<nhc-secured-page nhc-role="'rlUser'"></nhc-secured-page>
+<!--<nhc-link nhc-url="/" nhc-image="/images/rub9.png"-->
+<!--nhc-role="rlVolunteer"></nhc-link>-->
+<h3 class="form-horizontal-header">Fiche&nbsp;<span
+        ng-if="!appform.$pristine"
+        class="fa fa-pencil"></span>
+</h3>
+
+<form name="appform"
+      role="form"
+      class="form-horizontal"
+      novalidate>
+    <div class="form-group form-group-sm"
+         ng-show="showIDs">
+        <label class="col-sm-2 control-label">Systeem UUID</label>
+        <div class="col-sm-3">
+            <div class="form-control-static"
+                 ng-bind="guest.uuid">
+            </div>
+        </div>
+        <label class="col-sm-offset-1 col-sm-2 control-label">Systeem ID</label>
+        <div class="col-sm-3">
+            <div class="form-control-static"
+                 ng-bind="guest.id">
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="col-vertical-span img-rounded img-thumbnail nhc-clickable"
+                 ng-click="showImage($event)">
+                <img ng-repeat="animal in animals | filter:{'id': guest.animal}"
+                     class="img-responsive img-rounded"
+                     ng-src={{animal.image}}>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Aankomst</label>
+        <div class="col-sm-2">
+            <nhc-date-picker nhc-date="guest.entrance"
+                             init-date="today"
+                             max-date="guest.exit"
+                             ng-disabled="datePickerEntranceDisabled">
+            </nhc-date-picker>
+        </div>
+        <div class="col-sm-1">
+            <div class="nhc-clickable"
+                 ng-click="enableField($event, 'datePickerEntranceDisabled', 'Aankomst')">
+                <label ng-if="datePickerEntranceDisabled && allowUnlockingDisabledFields"
+                       class="control-label fa fa-lock"
+                       aria-hidden="true"></label>
+            </div>
+        </div>
+        <div ng-show="showExit">
+            <label class="col-sm-offset-1 col-sm-2 control-label">Vertrek</label>
+            <div class="col-sm-2">
+                <nhc-date-picker nhc-date="guest.exit"
+                                 init-date="today"
+                                 min-date="guest.entrance"
+                                 ng-disabled="datePickerExitDisabled">
+                </nhc-date-picker>
+            </div>
+            <div class="col-sm-1">
+                <div class="nhc-clickable"
+                     ng-click="enableField($event, 'datePickerExitDisabled', 'Vertrek')">
+                    <label ng-if="datePickerExitDisabled && allowUnlockingDisabledFields"
+                           class="control-label fa fa-lock"
+                           aria-hidden="true"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Opname reden</label>
+        <div class="col-sm-2">
+            <select class="form-control"
+                    ng-model="guest.entrance_reason"
+                    ng-options="entrance_reason.id as entrance_reason.name for entrance_reason in entrance_reasons | orderBy : 'name'">
+            </select>
+        </div>
+        <div ng-show="showExit">
+            <label class="col-sm-offset-2 col-sm-2 control-label">Vertrek
+                reden</label>
+            <div class="col-sm-2">
+                <select class="form-control"
+                        ng-model="guest.exit_reason"
+                        ng-options="exit_reason.id as exit_reason.name for exit_reason in exit_reasons | orderBy : 'name'"
+                        ng-disabled="exitReasonDisabled">
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <div class="nhc-clickable"
+                     ng-click="enableField($event, 'exitReasonDisabled', 'Vertrek reden')">
+                    <label ng-if="exitReasonDisabled && allowUnlockingDisabledFields"
+                           class="control-label fa fa-lock"
+                           aria-hidden="true"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+
+        <label class="col-sm-2 control-label">Vindplaats</label>
+        <div class="col-sm-4">
+            <input class="form-control"
+                   ng-model="guest.origin"
+                   ng-virtual-keyboard/>
+        </div>
+
+    </div>
+
+    <div class="form-group form-group-sm">
+
+        <label class="col-sm-2 control-label">Diersoort</label>
+        <div class="col-sm-2">
+            <select class="form-control"
+                    ng-model="guest.animal"
+                    ng-options="animal.id as animal.name for animal in animals | filter : animal_filter | orderBy : 'name'"
+                    ng-change="animalSelected()">
+            </select>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-filter"></span>
+                </div>
+                <input class="form-control"
+                       type="text"
+                       ng-model="animal_filter"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="col-sm-2 control-label">Streefgewicht</label>
+        <div ng-repeat="animal in animals | filter:{'id': guest.animal}"
+             ng-if="!animal.ideal_weight_female || animal.ideal_weight_general_male"
+             class="col-sm-2">
+            <div class="input-group col-sm-8" disabled>
+                <div class="input-group-addon">
+                    <span ng-if="!animal.ideal_weight_female"
+                          class="control-label fa fa-venus-mars"></span>
+                    <span ng-if="animal.ideal_weight_female"
+                          class="control-label fa fa-mars"></span>
+                </div>
+                <input disabled
+                       class="form-control"
+                       type="text"
+                       ng-model="animal.ideal_weight_general_male"/>
+            </div>
+        </div>
+        <div ng-repeat="animal in animals | filter:{'id': guest.animal}"
+             ng-if="animal.ideal_weight_female"
+             class="col-sm-2">
+            <div class="input-group col-sm-8" disabled>
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-venus"></span>
+                </div>
+                <input disabled
+                       class="form-control"
+                       type="text"
+                       ng-model="animal.ideal_weight_female"/>
+            </div>
+        </div>
+
+    </div>
+
+    <!--<div class="form-group form-group-sm">-->
+
+    <!--<label for="quantity"-->
+    <!--class="col-sm-2 control-label">Aantal</label>-->
+    <!--<div class="col-sm-1">-->
+    <!--<div id="quantity"-->
+    <!--class="form-control-static"-->
+    <!--ng-bind="unspecifiedSexQuantity + guest.male_quantity + guest.female_quantity">-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;<input id="quantity"&ndash;&gt;-->
+    <!--&lt;!&ndash;class="form-control"&ndash;&gt;-->
+    <!--&lt;!&ndash;type="number" min="1"&ndash;&gt;-->
+    <!--&lt;!&ndash;ng-model="unspecifiedSexQuantity + guest.male_quantity + guest.female_quantity"&ndash;&gt;-->
+    <!--&lt;!&ndash;ng-disabled="quantityDisabled"&ndash;&gt;-->
+    <!--&lt;!&ndash;ng-virtual-keyboard/>&ndash;&gt;-->
+    <!--&lt;!&ndash;ng-model="newQuantity"&ndash;&gt;-->
+    <!--</div>-->
+    <!--<div class="col-sm-1">-->
+    <!--<div class="nhc-clickable"-->
+    <!--ng-click="enableField($event, 'quantityDisabled')">-->
+    <!--<label for="quantity"-->
+    <!--ng-if="quantityDisabled && allowUnlockingDisabledFields"-->
+    <!--class="control-label fa fa-lock"-->
+    <!--aria-hidden="true"></label>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<label for="quantity_young_ones"-->
+    <!--class="col-sm-1 control-label">Jongen</label>-->
+    <!--<div class="col-sm-1">-->
+    <!--<input id="quantity_young_ones"-->
+    <!--class="form-control"-->
+    <!--type="number" min="0" max="{{newQuantity}}"-->
+    <!--ng-model="guest.quantity_young_ones"-->
+    <!--placeholder="0"-->
+    <!--ng-virtual-keyboard/>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Aantal per geslacht</label>
+        <div>
+            <div class="col-sm-6 col-container">
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <div class="input-group-addon"
+                             ng-disabled="quantityDisabled">
+                            <span class="control-label fa fa-venus-mars"></span>
+                        </div>
+                        <input class="form-control"
+                               type="number" min="0"
+                               placeholder="0"
+                               ng-model="unspecifiedSexQuantity"
+                               ng-disabled="quantityDisabled"
+                               ng-virtual-keyboard/>
+                    </div>
+                </div>
+                <!--</div>-->
+                <!--<div class="col-sm-2">-->
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <div class="input-group-addon"
+                             ng-disabled="quantityDisabled">
+                            <span class="control-label fa fa-mars"></span>
+                        </div>
+                        <input class="form-control"
+                               type="number" min="0"
+                               placeholder="0"
+                               ng-model="guest.male_quantity"
+                               ng-disabled="quantityDisabled"
+                               ng-virtual-keyboard/>
+                    </div>
+                </div>
+                <!--</div>-->
+                <!--<div class="col-sm-2">-->
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <div class="input-group-addon"
+                             ng-disabled="quantityDisabled">
+                            <span class="control-label fa fa-venus"></span>
+                        </div>
+                        <input class="form-control"
+                               type="number" min="0"
+                               placeholder="0"
+                               ng-model="guest.female_quantity"
+                               ng-disabled="quantityDisabled"
+                               ng-virtual-keyboard/>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="nhc-clickable"
+                         ng-click="enableField($event, 'quantityDisabled', 'Aantal per geslacht')">
+                        <label ng-if="quantityDisabled && allowUnlockingDisabledFields"
+                               class="control-label fa fa-lock"
+                               aria-hidden="true"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <scrollable-table watch="appData"
+                          class="col-sm-3"
+                          style="position:absolute; height: 19em;">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Gewicht (gram)</th>
+                    <th>
+                        <div class="nhc-clickable"
+                             ng-click="showChart($event)">
+                            <label class="control-label fa fa-line-chart"
+                                   aria-hidden="true"></label>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <nhc-date-picker
+                                nhc-date="newWeightMeasurement.date"
+                                init-date="today"
+                                min-date="guest.entrance"
+                                max-date="today"
+                                is-date-disabled="isDateDisabled">
+                        </nhc-date-picker>
+                    </td>
+                    <td>
+                        <input class="form-control"
+                               type="number" min="0"
+                               ng-model="newWeightMeasurement.grams"
+                               ng-virtual-keyboard/>
+                    </td>
+                    <td class="nhc-clickable">
+                        <span ng-click="createWeightMeasurement($event, newWeightMeasurement)"
+                              class="command-icon fa fa-plus-square fa-fw"></span>
+                    </td>
+                </tr>
+
+                <tr class="nhc-clickable"
+                    ng-click="changeWeightMeasurement($event, weightMeasurement)"
+                    ng-repeat="weightMeasurement in guestWeightMeasurements | orderBy: '-date' track by $index">
+                    <td>{{weightMeasurement.date | date: dateFormat}}</td>
+                    <td>
+                        <!--<div class="input-group">-->
+                        <!--<input class="form-control"-->
+                        <!--type="number" min="0"-->
+                        <!--ng-model="weightMeasurement.grams"-->
+                        <!--ng-disabled="existingWeightMeasurementDisabled"-->
+                        <!--ng-change="changeWeightMeasurementValue(weightMeasurement.grams, $index)"-->
+                        <!--ng-virtual-keyboard/>-->
+                        <!--<div style="font-size: 14px;-->
+                        <!--z-index: 5;-->
+                        <!--right: 30px;-->
+                        <!--position: absolute;-->
+                        <!--padding: 3px;-->
+                        <!--background-color: var(&#45;&#45;input-bg-color);-->
+                        <!--border: 1px solid var(&#45;&#45;off-black);"-->
+                        <!--class="nhc-clickable"-->
+                        <!--ng-disabled="existingWeightMeasurementDisabled"-->
+                        <!--ng-click="open($event)">-->
+                        <!--<span class="fa fa-chevron-up fa-fw"></span>-->
+                        <!--</div>-->
+                        <!--<div style="padding: 3px;"-->
+                        <!--class="input-group-addon nhc-clickable"-->
+                        <!--ng-disabled="existingWeightMeasurementDisabled"-->
+                        <!--ng-click="open($event)">-->
+                        <!--<span class="fa fa-chevron-down fa-fw"></span>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        {{weightMeasurement.grams}}
+                    </td>
+                    <td class="nhc-clickable">
+                        <span ng-click="deleteWeightMeasurement($event, weightMeasurement)"
+                              class="command-icon fa fa-trash fa-fw"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </scrollable-table>
+
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Chip/Ring/ID</label>
+        <div class="col-sm-6">
+            <input class="form-control"
+                   ng-model="guest.id_number"
+                   ng-virtual-keyboard/>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Extra
+            info</label>
+        <div class="col-sm-6">
+            <input class="form-control"
+                   ng-model="guest.just_comment"
+                   ng-virtual-keyboard/>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Medicatie</label>
+        <div class="col-sm-6">
+            <input class="form-control"
+                   ng-model="guest.medication"
+                   ng-virtual-keyboard/>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Kooi</label>
+        <div class="col-sm-2">
+            <select class="form-control"
+                    ng-model="guest.cage"
+                    ng-options="cage.id as cage.name for cage in cages | orderBy : 'name'">
+            </select>
+        </div>
+        <div class="col-sm-1">
+            <div class="nhc-clickable"
+                 ng-click="cageContent(cage.id)">
+                <label class="control-label fa fa-info-circle"
+                       aria-hidden="true"></label>
+            </div>
+        </div>
+
+        <label class="col-sm-2 control-label">Menu percentage</label>
+        <div class="col-sm-1">
+            <input class="form-control"
+                   type="number" min="0"
+                   ng-model="guest.menu_percentage"
+                   ng-virtual-keyboard/>
+        </div>
+        <!--<div class="col-sm-1">-->
+            <!--<label class="control-label">%</label>-->
+        <!--</div>-->
+
+        <!--<label for="menu_percentage_young_ones"-->
+        <!--class="col-sm-1 control-label">Jongen</label>-->
+        <!--<div class="col-sm-1">-->
+        <!--<input id="menu_percentage_young_ones"-->
+        <!--class="form-control"-->
+        <!--type="number" min="0"-->
+        <!--ng-model="guest.menu_percentage_young_ones"-->
+        <!--ng-virtual-keyboard/>-->
+        <!--</div>-->
+        <!--<div class="col-sm-1">-->
+        <!--<label class="control-label">%</label>-->
+        <!--</div>-->
+
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Waarschuwing</label>
+        <div class="col-sm-2">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                           ng-model="guest.staff_only"
+                           ng-true-value="1"
+                           ng-false-value="0"/>Uitblijven!
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                           ng-model="guest.dangerous"
+                           ng-true-value="1"
+                           ng-false-value="0"/>Gevaarlijk!
+                </label>
+            </div>
+        </div>
+        <label class="col-sm-offset-1 col-sm-2 control-label">Waarschuwingstekst</label>
+        <div class="col-sm-4">
+            <input class="form-control"
+                   ng-model="guest.comment"
+                   ng-virtual-keyboard/>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Adoptie</label>
+        <div class="col-sm-1">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                           ng-model="guest.for_adoption"
+                           ng-true-value="1"
+                           ng-false-value="0"/>
+                </label>
+            </div>
+        </div>
+        <div ng-if="guest.for_adoption === 1">
+            <label class="col-sm-1 control-label">Vanaf</label>
+            <div class="col-sm-2">
+                <nhc-date-picker nhc-date="guest.adoption_from"
+                                 init-date="today"
+                                 min-date="guest.entrance">
+                </nhc-date-picker>
+            </div>
+            <div class="col-sm-1">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               ng-model="guest.reserved"
+                               ng-true-value="1"
+                               ng-false-value="0"/>Gereserveerd
+                    </label>
+                </div>
+            </div>
+            <div ng-if="guest.reserved === 1">
+                <label class="col-sm-1 control-label">Voor</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                           ng-model="guest.reserved_for"
+                           ng-virtual-keyboard/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="form-group form-group-sm form-horizontal-footer">
+    <button ng-if="!appform.$pristine"
+            type="button"
+            ng-click="save()"
+            class="btn nhc-btn">Bewaren
+    </button>
+    <button type="button"
+            ng-click="back()"
+            class="btn nhc-btn">Annuleren
+    </button>
+    <button type="button"
+            ng-if="appform.$pristine && guest.quantity > 1"
+            ng-click="split()"
+            class="btn nhc-btn">Splitsen
+    </button>
+    <span ng-if="appform.$pristine && guest.status_code === 'RECOVER'">
+        <button type="button"
+                ng-if="!guest.exit"
+                ng-click="free()"
+                class="btn nhc-btn">Einde verblijf
+        </button>
+        <button type="button"
+                ng-if="guest.cage"
+                ng-click="ic()"
+                class="btn nhc-btn">Naar IC
+        </button>
+    </span>
+</div>

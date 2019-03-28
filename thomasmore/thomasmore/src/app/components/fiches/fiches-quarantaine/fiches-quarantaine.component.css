@@ -1,0 +1,64 @@
+/*quarantaineFicheButtons*/
+div.quarantaineFicheButtonGroup {
+  padding: 0;
+  padding-top: 15px !important;
+}
+
+div.quarantaineFicheButtonGroup > div {
+  padding: 1px !important;
+  width: 25% !important;
+}
+
+div.quarantaineFicheButtonGroup button {
+  width: 100%;
+  border-radius: 4px;
+  height: var(--input-height);
+  background-color: var(--button-bg-color) !important;
+  outline: none;
+}
+
+/*medisheFiche table*/
+div#quarantaineFiche table {
+  width: 100%;
+  height: 100%;
+}
+
+div#quarantaineFiche thead,
+div#quarantaineFiche tbody,
+div#quarantaineFiche tr,
+div#quarantaineFiche,
+td, div#quarantaineFiche th {
+  display: block;
+}
+
+div#quarantaineFiche tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+div#quarantaineFiche thead th {
+  height: 30px;
+  /*text-align: left;*/
+}
+
+div#quarantaineFiche tbody {
+  height: 325px;
+  overflow-y: scroll;
+}
+
+div#quarantaineFiche tbody td,
+div#quarantaineFiche thead th {
+  width: 33.33%;
+  float: left;
+  border-radius: 0;
+}
+
+div#quarantaineFiche .table-hover > tbody > tr:hover {
+  color: var(--off-black);
+}
+
+.form-horizontal .form-group{
+  margin:0px !important;
+}

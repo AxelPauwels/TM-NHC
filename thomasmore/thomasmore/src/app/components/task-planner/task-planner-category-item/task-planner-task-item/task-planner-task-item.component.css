@@ -1,0 +1,44 @@
+.task {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0.1em 0.1em 1em 0.1em;
+  width: 100%;
+  max-width: 100%;
+  font-size: large;
+  padding-bottom: 0.3em;
+  padding-right: 0.3em;
+}
+
+input[type='text'] {
+  font-size: 12px;
+  height: 30px;
+}
+
+*::-webkit-input-placeholder {
+  color: white;
+}
+*:-moz-placeholder {
+  /* FF 4-18 */
+  color: white;
+}
+*::-moz-placeholder {
+  /* FF 19+ */
+  color: white;
+}
+*:-ms-input-placeholder {
+  /* IE 10+ */
+  color: white;
+}
+
+.task>.row:first-child {
+  margin-bottom: 1em;
+}
+
+.input-group-btn>button {
+  padding: 9px 12px 8px 12px;
+}
+
+.task>div>div>span {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+}

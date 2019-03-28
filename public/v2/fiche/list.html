@@ -1,0 +1,100 @@
+<!--<nhc-secured-page nhc-role="'rlAdmin'"></nhc-secured-page>-->
+<!--<ng-include src="'/v2/config/config_links.html'"></ng-include>-->
+
+
+<h3 class="form-horizontal-header">Gastenfiches</h3>
+
+<form role="form" class="form-horizontal">
+    <div class="form-group form-group-sm">
+        <label class="control-label col-sm-2">Locatie/Status</label>
+        <div class="col-sm-3">
+            <select class="form-control"
+                    ng-model="ctrl.status_code"
+                    ng-change="onLocationStatusChange()"
+                    ng-disabled="!ctrl.locationStatusEnabled">
+                <option value="RECOVER">Achter/Normale verzorging</option>
+                <option value="IC">IC/Intensieve verzorging</option>
+                <option value="END">Elders/Gearchiveerd</option>
+                <!--<option value="ARCHIVED">Elders/Gearchiveerd</option>-->
+            </select>
+        </div>
+
+        <div class="col-sm-offset-2 col-sm-3">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-search"></span>
+                </div>
+                <input class="form-control"
+                       type="text"
+                       ng-model="searchValue"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="control-label col-sm-offset-1 col-sm-1">Totaal:
+            {{guests.length || 0}}</label>
+    </div>
+
+    <scrollable-table watch="appData" style="height: 510px">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Aankomst</th>
+                <!--<th>Vertrek</th>-->
+                <th>Systeem UUID</th>
+                <th>Kooi</th>
+                <th>Diersoort</th>
+                <!--<th>Aantal</th>-->
+                <th>Aantal per geslacht</th>
+                <!--<th><span class="fa fa-venus-mars bold"></span></th>-->
+                <!--<th><span class="fa fa-mars bold"></span></th>-->
+                <!--<th><span class="fa fa-venus bold"></span></th>-->
+                <th>Ring/Chip/ID</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="guest in guests | filter : searchValue | orderBy : ['-entrance', 'animal_name'] track by $index"
+                class="nhc-clickable"
+                ng-click="fiche(guest)">
+                <td ng-bind="guest.entrance | date : ctrl.dateFormat"></td>
+                <td ng-bind="guest.uuid"></td>
+                <td>
+                    <div ng-if="guest.cage_name"
+                         ng-style="{color: guest.color}"
+                         class="nhc-cage-label nhc-cage-header"
+                         ng-bind="guest.cage_name">
+                    </div>
+                </td>
+                <td ng-bind="guest.animal_name"></td>
+                <!--<td ng-bind="guest.quantity"></td>-->
+                <td>
+                    <div class="col-sm-4 col-container">
+                        <div ng-if="guest.quantity - guest.male_quantity - guest.female_quantity">
+                            <span class="fa fa-venus-mars bold">&nbsp;</span>
+                            <span ng-bind="guest.quantity - guest.male_quantity - guest.female_quantity"></span>
+                        </div>
+                    </div>
+                    <!--</td>-->
+                    <!--<td>-->
+                    <div class="col-sm-4 col-container">
+                        <div ng-if="guest.male_quantity">
+                            <span class="fa fa-mars bold">&nbsp;</span>
+                            <span ng-bind="guest.male_quantity"></span>
+                        </div>
+                    </div>
+                    <!--</td>-->
+                    <!--<td>-->
+                    <div class="col-sm-4 col-container">
+                        <div ng-if="guest.female_quantity">
+                            <span class="fa fa-venus bold">&nbsp;</span>
+                            <span ng-bind="guest.female_quantity"></span>
+                        </div>
+                    </div>
+                </td>
+                <td ng-bind="guest.id_number"></td>
+            </tr>
+            </tbody>
+        </table>
+    </scrollable-table>
+</form>

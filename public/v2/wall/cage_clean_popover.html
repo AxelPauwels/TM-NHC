@@ -1,0 +1,20 @@
+<!-- public/v2/wall/cage_content_popover.html -->
+<div>
+    <div class="popover-content-header form-horizontal-header">
+        <span class="nhc-cage-label nhc-cage-header"
+              ng-class="css"
+              ng-style="{color: cage.color}"
+              ng-bind="cage.name">
+        </span>
+    </div>
+
+    <span class="el el-broom"
+          ng-bind="'&nbsp;Uitruimen en poetsen'"></span>
+
+    <div class="popover-content-footer">
+        <button class="btn nhc-btn btn-xs"
+                ng-click="popover.close($event, popover.clean)">Sluiten</button>
+        <button class="btn nhc-btn btn-xs"
+                ng-click="popover.cageCleaned($event, popover.clean)">Gepoetst</button>
+    </div>
+</div>

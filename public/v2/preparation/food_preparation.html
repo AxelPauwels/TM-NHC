@@ -1,0 +1,34 @@
+<h3 ng-click="toggleShow()"
+    class="nhc-clickable btn nhc-btn horizontal-flex-container">
+    <!--<span class="fa fa-fw fa-chevron-circle-right"></span>-->
+    <span></span>
+    <span>Uitleggen</span>
+    <span class="fa-stack">
+        <span class="fa fa-stack-1x fa-font-1x5 fa-square-o"></span>
+        <span class="fa fa-stack-1x fa-check"></span>
+    </span>
+</h3>
+
+<div class="nhc-route"
+     ng-show="show"
+     style="padding: 1px;">
+    <div class="nhc-cage" style="height: unset; width: unset;">
+    <ul class="nhc-list">
+        <li ng-repeat="item in items">
+            <span ng-bind="item.quantity + item.extra_quantity"></span>
+            <span ng-if="item.short_measure_name != '---'"
+                  ng-bind="item.short_measure_name"></span>
+            <span ng-bind="item.short_name || item.name"></span>
+            <!--<span ng-if="item.singular && item.quantity == 1"-->
+                  <!--ng-bind="item.singular"></span>-->
+            <!--<span ng-if="item.plural && item.quantity != 1"-->
+                  <!--ng-bind="item.plural"></span>-->
+            <!--<span ng-if="item.singular" ng-bind="item.name"></span>-->
+            <!--<span ng-if="!item.singular && item.display_singular && item.quantity == 1"-->
+                  <!--ng-bind="item.display_singular"></span>-->
+            <!--<span ng-if="!item.plural && item.display_plural && item.quantity != 1"-->
+                  <!--ng-bind="item.display_plural"></span>-->
+        </li>
+    </ul>
+    </div>
+</div>

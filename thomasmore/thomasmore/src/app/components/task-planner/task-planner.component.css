@@ -1,0 +1,32 @@
+.form-horizontal-header>button.pull-right {
+  margin-right: 0.8em;
+}
+.form-horizontal-header>button.pull-left {
+  margin-left: 0.8em;
+}
+
+/* DatePicker */
+.selectiongroup{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.btnpickerenabled{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.btnclearenabled{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.mydp{
+  border: 1px solid black !important;
+  background-color: #b57423 !important;
+}
+
+.mydp .selection {
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}

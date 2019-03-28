@@ -1,0 +1,74 @@
+<div id="quarantaineFiche">
+
+  <form [formGroup]="quarantaineForm" class="form-horizontal fichesForm"
+        id="ngQuarantaineForm"
+        #documentEditForm="ngForm">
+
+    <div class="col-xs-12 quarantaineFicheButtonGroup">
+      <div class="col-xs-3 form-group myDatePickerQuarantaine" style="margin-top:-3px!important" myDatePickerQuarantaine>
+          <my-date-picker name="quarantaineDate"
+                          id="quarantaineDate"
+                          [options]="myDatePickerOptions"
+                          formControlName="quarantaineDate"></my-date-picker>
+      </div>
+      <div class="form-group col-xs-3">
+          <select formControlName="quarantaineAction"
+                  name="quarantaineAction"
+                  class="form-control"
+                  id="quarantaineAction"
+                  required>
+            <option value="0" selected disabled>Handeling</option>
+            <option *ngFor="let action of quarantaineActions | async" [value]="action?.id">{{action?.name}}</option>
+          </select>
+      </div>
+      <div class="form-group col-xs-3" >
+          <input formControlName="quarantaineExtraInfo"
+                 name="quarantaineExtraInfo"
+                 class="form-control"
+                 id="quarantaineExtraInfo"
+                 placeholder="Extra Info"/>
+      </div>
+      <div class="form-group col-xs-3" >
+        <button #bewarenButton (click)="bewaarQuarantaine($event)" type="button" value="bewarenButton">
+          Bewaren
+        </button>
+      </div>
+    </div>
+    <div class="gewichtComponent">
+        <table class="table table-condensed ng-scope">
+          <thead>
+          <tr>
+            <th>
+              <div class="th-inner" title="Datum" style="width: 70px;">
+                <div class="box">Datum</div>
+              </div>
+            </th>
+            <th>
+              <div class="th-inner" title="Gewicht (gram)" style="width: 59px;">
+                <div class="box">Handeling</div>
+              </div>
+            </th>
+            <th>
+              <div class="th-inner" title="" style="width: 48px;">
+                <div class="box">Extra info
+                </div>
+              </div>
+            </th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor=" let quarantaine of quarantaines">
+            <td style="padding-left: 12px">{{quarantaine.date | date:'dd/MM/yyyy'}}</td>
+            <td style="padding-left: 12px">{{quarantaine.quarantaine_action}}</td>
+            <td style="padding-left: 12px">{{quarantaine.extra_info}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+    </div>
+  </form>
+
+
+</div>
+

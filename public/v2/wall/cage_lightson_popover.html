@@ -1,0 +1,17 @@
+<div>
+    <div class="popover-content-header form-horizontal-header">
+        <span class="nhc-cage-label nhc-cage-header"
+              ng-class="css"
+              ng-style="{color: cage.color}"
+              ng-bind="cage.name">
+        </span>
+    </div>
+
+    <span class="ion ion-ios-lightbulb"
+          ng-bind="'&nbsp;Licht aan!'"></span>
+
+    <div class="popover-content-footer">
+        <button class="btn nhc-btn btn-xs"
+                ng-click="popover.close($event, popover.lightson)">Sluiten</button>
+    </div>
+</div>

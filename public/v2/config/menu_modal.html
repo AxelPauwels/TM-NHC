@@ -1,0 +1,96 @@
+<div class="modal-header">
+    <h3 class="form-horizontal-header">Menu&nbsp;<span
+            ng-if="!appform.$pristine"
+            class="fa fa-pencil"></span></h3>
+</div>
+
+<div class="modal-body">
+    <form name="appform"
+          role="form"
+          class="form-horizontal">
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Systeem ID</label>
+
+            <div class="col-sm-2">
+                <div class="form-control-static"
+                     ng-bind="menu.id">
+                </div>
+            </div>
+
+            <!--<div class="col-sm-3 control-label">-->
+                <!--<span ng-repeat="route in routes | filter:{'id': cage.route}"-->
+                      <!--ng-bind="cage.name"-->
+                      <!--ng-style="{color: route.color}"-->
+                      <!--class="nhc-cage-label nhc-cage-header">-->
+                <!--</span>-->
+            <!--</div>-->
+        </div>
+
+        <!--<div class="form-group form-group-sm">-->
+            <!--<label class="col-sm-4 control-label">Naam</label>-->
+            <!--<div class="col-sm-5">-->
+                <!--<input class="form-control"-->
+                       <!--ng-model="menu.name"-->
+                       <!--ng-virtual-keyboard/>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Diersoort</label>
+            <div class="col-sm-5">
+                <select class="form-control"
+                        ng-model="menu.animal"
+                        ng-options="animal.id as animal.name for animal in animals | orderBy : 'name'">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Voedsel</label>
+            <div class="col-sm-5">
+                <select class="form-control"
+                        ng-model="menu.food"
+                        ng-options="food.id as food.name for food in foods | orderBy : 'name'">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Hoeveelheid</label>
+            <div class="col-sm-3">
+                <input class="form-control"
+                       type="number" min="0"
+                       ng-model="menu.quantity"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Per x dieren</label>
+            <div class="col-sm-3">
+                <input class="form-control"
+                       type="number" min="0"
+                       ng-model="menu.each"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <!--<div class="form-group form-group-sm">-->
+            <!--<label class="col-sm-4 control-label">Voederbord</label>-->
+            <!--<div class="col-sm-5">-->
+                <!--<select class="form-control"-->
+                        <!--ng-model="menu.board"-->
+                        <!--ng-options="board.id as board.name for board in boards | orderBy : 'name'">-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-if="!appform.$pristine"
+            class="btn nhc-btn" ng-click="ok()">Bewaren
+    </button>
+    <button class="btn nhc-btn" ng-click="cancel()">Annuleren</button>
+</div>

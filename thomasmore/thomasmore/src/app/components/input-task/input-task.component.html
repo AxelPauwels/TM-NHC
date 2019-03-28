@@ -1,0 +1,78 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h3 class="form-horizontal-header">Taak toevoegen</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="form-group form-group-sm">
+        <label for="taskname" class="col-sm-3 control-label">Naam taken:</label>
+        <div class="col-sm-6">
+          <select id="taskname" name="taskname" [(ngModel)]="selectName" class="form-control" required>
+            <option selected disabled [value]="null"></option>
+            <option *ngFor="let name of taskNames" [value]="name">
+              {{name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="selectName == 'andere'" class="form-group form-group-sm">
+        <div class="row">
+          <label for="customName" class="col-sm-3 control-label">Naam:</label>
+          <div class="col-sm-6">
+            <input id="customName" name="customName" type="text" [(ngModel)]="task.custom_name" class="form-control"
+                   required>
+          </div>
+        </div>
+        <div class="row">
+          <label for="description" class="col-sm-3 control-label">beschrijving: </label>
+          <div class="col-sm-6">
+            <input id="description" type="text" name="description" [(ngModel)]="task.information" class="form-control"
+                   required>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectName != 'andere' && selectName != '--selecteer--' && selectName"
+           class="form-group form-group-sm">
+        <label for="cage" class="col-sm-3 control-label">Kooi: </label>
+        <div class="col-sm-6">
+          <select id="cage" name="cage" [(ngModel)]="task.cage" class="form-control" required>
+            <option selected disabled [value]="null"></option>
+            <option *ngFor="let cage of cages" [ngValue]="cage">
+              {{cage.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label for="category" class="col-sm-3 control-label" data-live-search="true">Category: </label>
+        <div class="col-sm-6">
+          <select id="category" name="cage" [(ngModel)]="task.taskv2_category" class="form-control" required>
+            <option selected disabled [value]="null"></option>
+            <option *ngFor="let category of taskCategories" [ngValue]="category">
+              {{category.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group form-group-sm">
+        <label for="taskDate" class="col-sm-3 control-label">Datum:</label>
+        <div class="col-sm-6">
+          <my-date-picker id="taskDate" [options]="myDatePickerOptions" name="taskDate"
+                          [(ngModel)]="task.date_created"></my-date-picker>
+          <!--input id="taskDate" name="taskDate" type="date" [(ngModel)]="task.date_created" class="form-control" required-->
+        </div>
+      </div>
+
+      </form>
+      <div class="modal-footer">
+        <button class="btn nhc-btn" [disabled]="!validateForm()" (click)="onSubmit()">opslaan</button>
+        <button class="btn nhc-btn" (click)="onCancel()">annuleren</button>
+
+      </div>
+  </div>
+</div>

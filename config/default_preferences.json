@@ -1,0 +1,323 @@
+{
+  "label": "Instellingen",
+  "children": {
+    "userInterface": {
+      "label": "Gebruikersinterface",
+      "children": {
+        "colors": {
+          "label": "Kleuren",
+          "children": {
+            "mainBgColor": {
+              "label": "Algemene achtergrondkleur",
+              "data": {
+                "type": "color",
+                "value": "rgb(88, 160, 160)",
+                "cssVar": "--main-bg-color"
+              }
+            },
+            "buttonBgColor": {
+              "label": "Knop achtergrondkleur",
+              "data": {
+                "type": "color",
+                "value": "rgb(181, 116, 35)",
+                "cssVar": "--button-bg-color"
+              }
+            },
+            "inputBgColor": {
+              "label": "Invoerveld achtergrondkleur",
+              "data": {
+                "type": "color",
+                "value": "rgb(181, 116, 35)",
+                "cssVar": "--input-bg-color"
+              }
+            },
+            "offWhite": {
+              "label": "Wit tint",
+              "data": {
+                "type": "color",
+                "value": "rgb(255, 255, 231)",
+                "cssVar": "--off-white"
+              }
+            },
+            "offBlack": {
+              "label": "Zwart tint",
+              "data": {
+                "type": "color",
+                "value": "rgb(64, 32, 32)",
+                "cssVar": "--off-black"
+              }
+            }
+          }
+        },
+        "virtualKeyboard": {
+          "label": "Virtueel toetsenbord",
+          "children": {
+            "enable": {
+              "label": "Inschakelen",
+              "data": {
+                "type": "boolean",
+                "value": 1
+              }
+            },
+            "fixedBottomPosition": {
+              "label": "Vaste positie onderaan",
+              "data": {
+                "type": "boolean",
+                "value": 1
+              }
+            },
+            "allowResizing": {
+              "label": "Grootte aanpassing toestaan",
+              "data": {
+                "type": "boolean",
+                "value": 1
+              }
+            },
+            "allowNumPadExtension": {
+              "label": "Numeriek toetsenbord tonen toestaan",
+              "data": {
+                "type": "boolean",
+                "value": 1
+              }
+            },
+            "allowTypeSelection": {
+              "label": "Type selectie toestaan",
+              "data": {
+                "type": "boolean",
+                "value": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "leftovers": {
+      "label": "Voedsel resten",
+      "children": {
+        "warningLevels": {
+          "label": "Waarschuwingsniveau's",
+          "data": {
+            "type": [
+              "list",
+              "percent",
+              "colored"
+            ],
+            "value": {
+              "styling": {
+                "color": 0,
+                "background-color": 1,
+                "border-color": 0
+              },
+              "colorLevels": [
+                {
+                  "percent": 20,
+                  "color": "rgb(224, 224, 96)"
+                },
+                {
+                  "percent": 30,
+                  "color": "rgb(255, 192, 112)"
+                },
+                {
+                  "percent": 40,
+                  "color": "rgb(224, 128, 128)"
+                }
+              ]
+            }
+          }
+        },
+        "showPercentage": {
+          "label": "Percentage tonen",
+          "data": {
+            "type": "boolean",
+            "value": 1
+          }
+        },
+        "showMenuQuantityAnimalCount": {
+          "label": "Aantal gevoederd / dieren tonen",
+          "data": {
+            "type": "boolean",
+            "value": 1
+          }
+        },
+        "popup": {
+          "label": "Popup",
+          "children": {
+            "daysAgoToShow": {
+              "label": "Aantal afgelopen dagen te tonen",
+              "data": {
+                "type": "number",
+                "value": 6
+              }
+            }
+          }
+        },
+        "list": {
+          "label": "Lijst",
+          "children": {
+            "daysAgoToShow": {
+              "label": "Aantal afgelopen dagen te tonen",
+              "data": {
+                "type": "number",
+                "value": 13
+              }
+            }
+          }
+        }
+      }
+    },
+    "fiche": {
+      "label": "Fiche",
+      "children": {
+        "allowUnlockingDisabledFields": {
+          "label": "Deblokkeren van velden toestaan",
+          "data": {
+            "type": "boolean",
+            "value": 1
+          }
+        }
+      }
+    },
+    "system": {
+      "label": "Systeem",
+      "children": {
+        "fineTuning": {
+          "label": "Fijnafstelling",
+          "children": {
+            "automaticUpdateDebounceTime": {
+              "label": "Wachttijd in milliseconden alvorens een wijziging automatisch op te slaan",
+              "data": {
+                "type": "number",
+                "value": 750
+              }
+            }
+          }
+        },
+        "logging": {
+          "label": "Log",
+          "children": {
+            "server": {
+              "label": "Server",
+              "children": {
+                "toConsole": {
+                  "label": "Naar console",
+                  "children": {
+                    "level": {
+                      "label": "Niveau",
+                      "data": {
+                        "type": "selection",
+                        "options": [
+                          "error",
+                          "warn",
+                          "info",
+                          "verbose",
+                          "debug",
+                          "silly"
+                        ],
+                        "value": "debug"
+                      }
+                    }
+                  }
+                },
+                "toFile": {
+                  "label": "Naar bestand",
+                  "children": {
+                    "level": {
+                      "label": "Niveau",
+                      "data": {
+                        "type": "selection",
+                        "options": [
+                          "error",
+                          "warn",
+                          "info",
+                          "verbose",
+                          "debug",
+                          "silly"
+                        ],
+                        "value": "debug"
+                      }
+                    },
+                    "name": {
+                      "label": "Naam",
+                      "data": {
+                        "type": "string",
+                        "value": "../log/server.log"
+                      }
+                    },
+                    "size": {
+                      "label": "Grootte",
+                      "data": {
+                        "type": "bytesize",
+                        "options": [
+                          "B",
+                          "KB",
+                          "MB",
+                          "GB"
+                        ],
+                        "value": {
+                          "number": 16,
+                          "factor": "MB"
+                        }
+                      }
+                    },
+                    "keepQuantity": {
+                      "label": "Aantal te bewaren",
+                      "data": {
+                        "type": "number",
+                        "value": 5
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "client": {
+              "label": "Client",
+              "children": {
+                "toConsole": {
+                  "label": "Naar console",
+                  "children": {
+                    "level": {
+                      "label": "Niveau",
+                      "data": {
+                        "type": "selection",
+                        "options": [
+                          "error",
+                          "warn",
+                          "info",
+                          "debug",
+                          "log"
+                        ],
+                        "value": "debug"
+                      }
+                    }
+                  }
+                },
+                "toServer": {
+                  "label": "Naar server",
+                  "children": {
+                    "level": {
+                      "label": "Niveau",
+                      "data": {
+                        "type": "selection",
+                        "options": [
+                          "error",
+                          "warn",
+                          "info",
+                          "debug",
+                          "log"
+                        ],
+                        "value": "debug"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

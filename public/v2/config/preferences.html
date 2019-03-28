@@ -1,0 +1,378 @@
+<nhc-secured-page nhc-role="'rlAdmin'"></nhc-secured-page>
+<ng-include src="'/v2/config/config_links.html'"></ng-include>
+<h3 class="form-horizontal-header">Instellingen</h3>
+
+<form name="appform"
+      role="form"
+      class="form-horizontal">
+
+    <div class="form-group form-group-sm">
+        <div class="col-sm-6">
+            <div class="col-sm-offset-1 col-sm-11 col-container horizontal-flex-container">
+                <span class="nhc-clickable"
+                      ng-click="treeController.expand_all()">
+                    <span class="fa fa-chevron-down fa-fw"></span>
+                    <span>Volledig uitklappen</span>
+                </span>
+                <span class="nhc-clickable"
+                      ng-click="treeController.collapse_all()">
+                    <span class="fa fa-chevron-right fa-fw"></span>
+                    <span>Volledig inklappen</span>
+                </span>
+                <span class="nhc-clickable"
+                      ng-click="factoryReset()">
+                    <span class="fa fa-undo fa-fw"></span>
+                    <span>Terug naar fabrieksinstellingen</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+
+        <div class="col-sm-6">
+            <div class="col-sm-offset-1 col-sm-11 col-container"
+                 style="height: 530px">
+                <abn-tree class="scrollArea"
+                          tree-data="treeData"
+                          tree-control="treeController"
+                          on-select="onBranchSelect(branch)"
+                          icon-leaf="fa fa-leaf"
+                          icon-expand="fa fa-chevron-right"
+                          icon-collapse="fa fa-chevron-down"
+                          expand-level="3"
+                          initial-selection="">
+                </abn-tree>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div ng-if="selectedBranch !== null"
+                 class="col-sm-11 form-branch-data">
+
+                <div>
+                    <label ng-repeat="label in selectedPathLabels track by $index">
+                        <span class="fa fa-chevron-right fa-fw"></span>{{label}}
+                    </label>
+                </div>
+                <span class="fa fa-leaf fa-fw"></span>
+                <label class="control-label">{{selectedBranch.label}}</label>
+                <span ng-if="!appform.$pristine"
+                      class="fa fa-pencil"></span>
+
+                <!-- Color type -->
+                <div ng-if="selectedBranch.data.type.indexOf('color') >= 0">
+                    <input type="color" spectrum-colorpicker
+                           options="colorPickerOptions"
+                           ng-model="selectedBranch.data.value"
+                           ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                           ng-change="onColorChange()"/>
+                </div>
+
+                <!-- Boolean type -->
+                <div ng-if="selectedBranch.data.type.indexOf('boolean') >= 0">
+                    <div class="checkbox stand-alone">
+                        <label>
+                            <input type="checkbox"
+                                   ng-true-value="{{selectedBranch.data.true || 1}}"
+                                   ng-false-value="{{selectedBranch.data.false || 0}}"
+                                   ng-model="selectedBranch.data.value"
+                                   ng-change="save()"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Number type -->
+                <div ng-if="selectedBranch.data.type.indexOf('number') >= 0">
+                    <input name="number"
+                           class="form-control"
+                           type="number"
+                           min="{{selectedBranch.data.min || 0}}"
+                           max="{{selectedBranch.data.max || 999999999}}"
+                           step="{{selectedBranch.data.step || 1}}"
+                           ng-model="selectedBranch.data.value"
+                           ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                           ng-change="save()"
+                           ng-virtual-keyboard/>
+                    <div>
+                        <label class="col-sm-3 form-control-static">
+                            minimum:</label>
+                        <div class="form-control-static">
+                            {{selectedBranch.data.min || 0}}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 form-control-static">
+                            maximum:</label>
+                        <div class="form-control-static">
+                            {{selectedBranch.data.max || 999999999}}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 form-control-static">
+                            stapgrootte:</label>
+                        <div class="form-control-static">
+                            {{selectedBranch.data.step || 1}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Percent type -->
+                <div ng-if="selectedBranch.data.type.indexOf('percent') >= 0">
+
+                    <div  ng-if="selectedBranch.data.type.indexOf('colored') >= 0"
+                          class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Kleur toepassen als</label>
+                        <div ng-repeat="(key, value) in selectedBranch.data.value.styling"
+                             class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"
+                                           ng-model="selectedBranch.data.value.styling[key]"
+                                           ng-true-value="1"
+                                           ng-false-value="0"
+                                           ng-change="save()"/>{{key === 'color' ? 'tekstkleur' : (key === 'background-color' ? 'achtergrondkleur' : (key === 'border-color' ? 'kaderkleur' : ''))}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- List / multi-value type -->
+                    <div ng-if="selectedBranch.data.type.indexOf('list') >= 0">
+                        <scrollable-table watch="appData"
+                                          style="height: 460px"
+                                          class="col-sm-12">
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Percentage</th>
+                                    <th ng-if="selectedBranch.data.type.indexOf('colored') >= 0">Kleur</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input class="form-control"
+                                               type="number"
+                                               min="{{selectedBranch.data.min || 0}}"
+                                               max="{{selectedBranch.data.max || 100}}"
+                                               step="{{selectedBranch.data.step || 1}}"
+                                               ng-model="newListItem.itemValue.percent"
+                                               ng-virtual-keyboard/>
+                                    </td>
+                                    <td ng-if="selectedBranch.data.type.indexOf('colored') >= 0">
+                                        <input type="color" spectrum-colorpicker
+                                               options="colorPickerOptions"
+                                               ng-model="newListItem.itemValue.color"/>
+                                    </td>
+                                    <td class="nhc-clickable">
+                                        <span  ng-if="selectedBranch.data.type.indexOf('colored') < 0"
+                                               ng-click="createListItem(newListItem.itemValue)"
+                                               class="command-icon fa fa-plus-square fa-fw"></span>
+                                        <span  ng-if="selectedBranch.data.type.indexOf('colored') >= 0"
+                                               ng-click="createListItem(newListItem.itemValue.percent >= 0 ? newListItem.itemValue : null, 'colorLevels', 'percent')"
+                                               class="command-icon fa fa-plus-square fa-fw"></span>
+                                    </td>
+                                </tr>
+                                <tr  ng-if="selectedBranch.data.type.indexOf('colored') < 0"
+                                     ng-repeat="itemValue in selectedBranch.data.value | orderBy : ['percent'] as orderedValues track by $index">
+                                    <td>
+                                        <input class="form-control"
+                                               type="number"
+                                               min="{{selectedBranch.data.min || 0}}"
+                                               max="{{selectedBranch.data.max || 100}}"
+                                               step="{{selectedBranch.data.step || 1}}"
+                                               ng-model="orderedValues[$index].percent"
+                                               ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                                               ng-change="updateListItem(itemValue, orderedValues[$index])"
+                                               ng-virtual-keyboard/>
+                                    </td>
+                                    <td class="nhc-clickable">
+                                    <span ng-click="deleteListItem(itemValue)"
+                                          class="command-icon fa fa-trash fa-fw"></span>
+                                    </td>
+                                </tr>
+                                <tr  ng-if="selectedBranch.data.type.indexOf('colored') >= 0"
+                                     ng-repeat="itemValue in selectedBranch.data.value.colorLevels | orderBy : ['percent'] as orderedValues track by $index">
+                                    <td>
+                                        <input class="form-control"
+                                               type="number"
+                                               min="{{selectedBranch.data.min || 0}}"
+                                               max="{{selectedBranch.data.max || 100}}"
+                                               step="{{selectedBranch.data.step || 1}}"
+                                               ng-model="orderedValues[$index].percent"
+                                               ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                                               ng-change="updateListItem(itemValue, orderedValues[$index].percent >= 0 ? orderedValues[$index] : null, 'colorLevels', 'percent')"
+                                               ng-virtual-keyboard/>
+                                    </td>
+                                    <td>
+                                        <input type="color" spectrum-colorpicker
+                                               options="colorPickerOptions"
+                                               ng-model="orderedValues[$index].color"
+                                               ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                                               ng-change="updateListItem(itemValue, orderedValues[$index], 'colorLevels', 'percent')"/>
+                                    </td>
+                                    <td class="nhc-clickable">
+                                    <span ng-click="deleteListItem(itemValue, 'colorLevels')"
+                                          class="command-icon fa fa-trash fa-fw"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </scrollable-table>
+                    </div>
+
+                    <!--<div>-->
+                        <!--<label class="col-sm-3 form-control-static">-->
+                            <!--minimum:</label>-->
+                        <!--<div class="form-control-static">-->
+                            <!--{{selectedBranch.data.min || 0}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<label class="col-sm-3 form-control-static">-->
+                            <!--maximum:</label>-->
+                        <!--<div class="form-control-static">-->
+                            <!--{{selectedBranch.data.max || 100}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<label class="col-sm-3 form-control-static">-->
+                            <!--stapgrootte:</label>-->
+                        <!--<div class="form-control-static">-->
+                            <!--{{selectedBranch.data.step || 1}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+                <!-- String type -->
+                <div ng-if="selectedBranch.data.type.indexOf('string') >= 0">
+                    <!-- List / multi-value type -->
+                    <div ng-if="selectedBranch.data.type.indexOf('list') >= 0">
+                        <scrollable-table watch="appData"
+                                          style="height: 460px"
+                                          class="col-sm-12">
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Tekst</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input class="form-control"
+                                               type="text"
+                                               ng-model="newListItem.itemValue"
+                                               ng-virtual-keyboard/>
+                                    </td>
+                                    <td class="nhc-clickable">
+                                    <span ng-click="createListItem(newListItem.itemValue)"
+                                          class="command-icon fa fa-plus-square fa-fw"></span>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="itemValue in selectedBranch.data.value | orderBy : [''] as orderedValues track by $index">
+                                    <td>
+                                        <input class="form-control"
+                                               type="text"
+                                               ng-model="orderedValues[$index]"
+                                               ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                                               ng-change="updateListItem(itemValue, orderedValues[$index])"
+                                               ng-virtual-keyboard/>
+                                    </td>
+                                    <td class="nhc-clickable">
+                                    <span ng-click="deleteListItem(itemValue)"
+                                          class="command-icon fa fa-trash fa-fw"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </scrollable-table>
+                    </div>
+                    <!-- Non-list / single-value type -->
+                    <div ng-if="selectedBranch.data.type.indexOf('list') < 0">
+                        <input class="form-control"
+                               type="text"
+                               ng-model="selectedBranch.data.value"
+                               ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                               ng-change="save()"
+                               ng-virtual-keyboard/>
+                    </div>
+
+                    <!-- SQL filter sub-type -->
+                    <div ng-if="selectedBranch.data.type.indexOf('filter') >= 0 && selectedBranch.data.type.indexOf('sql') >= 0">
+                        <label class="col-sm-5 form-control-static">Databank
+                            zoek
+                            patroon:</label>
+                        <div class="form-control-static">
+                            <!--SQL pattern matching enables you to use _ to match any single character
+                            and % to match an arbitrary number of characters (including zero characters).-->
+                            Gebruik _ voor 1 willekeurig karakter en % voor een
+                            willekeurig aantal willekeurige karakters.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Selection type -->
+                <div ng-if="selectedBranch.data.type.indexOf('selection') >= 0">
+                    <select class="form-control"
+                            ng-model="selectedBranch.data.value"
+                            ng-options="option for option in selectedBranch.data.options"
+                            ng-change="save()">
+                    </select>
+                </div>
+
+                <!-- Bytesize type -->
+                <div ng-if="selectedBranch.data.type.indexOf('bytesize') >= 0">
+                    <div class="row form-group form-group-sm">
+                        <div class="col-sm-3">
+                            <input class="form-control"
+                                   type="number"
+                                   min="{{selectedBranch.data.min || 0}}"
+                                   max="{{selectedBranch.data.max || 999999999}}"
+                                   step="{{selectedBranch.data.step || 1}}"
+                                   ng-model="selectedBranch.data.value.number"
+                                   ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                                   ng-change="save()"
+                                   ng-virtual-keyboard/>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control"
+                                    ng-model="selectedBranch.data.value.factor"
+                                    ng-options="option for option in selectedBranch.data.options"
+                                    ng-change="save()">
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 form-control-static">
+                            minimum:</label>
+                        <div class="form-control-static">
+                            {{selectedBranch.data.min || 0}}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 form-control-static">
+                            maximum:</label>
+                        <div class="form-control-static">
+                            {{selectedBranch.data.max || 999999999}}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 form-control-static">
+                            stapgrootte:</label>
+                        <div class="form-control-static">
+                            {{selectedBranch.data.step || 1}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,3 @@
+.hospitalizationCell:not(:empty) {
+  background-color: orange;
+}

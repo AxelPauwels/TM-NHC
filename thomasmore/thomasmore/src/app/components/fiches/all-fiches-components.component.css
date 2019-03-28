@@ -1,0 +1,59 @@
+/*GEMEENSCHAPPELIJK VOOR ALLE FICHE-COMPONENTEN*/
+
+/*page-content*/
+div.fichesContainerContent {
+  height: 100% !important;
+  padding: 0 !important;
+  margin-top: 10px !important;
+}
+
+/*forms*/
+form.fichesForm {
+  min-height: 445px !important;
+}
+
+.fichesForm.form-horizontal {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/*forms - elements height*/
+.fichesForm .form-control {
+font-size: 14px !important;
+height: 30px !important;
+-webkit-appearance: none !important;
+-moz-appearance: none !important;
+}
+
+/*forms - labels*/
+.fichesForm label {
+  margin: 0 !important;
+  color: var(--off-black);
+  font-weight: normal !important;
+}
+
+/*forms - select (dropdown)*/
+.fichesForm select {
+  background-image: url(../../../assets/images/caret-down.png);
+  -webkit-background-size: 10px;
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: 98% 50%;
+}
+
+/*form - placeholder color*/
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--off-white);
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  color: var(--off-white);
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  color: var(--off-white);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: var(--off-white);
+}

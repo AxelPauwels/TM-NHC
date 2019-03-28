@@ -1,0 +1,77 @@
+<nhc-secured-page nhc-role="'rlAdmin'"></nhc-secured-page>
+<ng-include src="'/v2/config/config_links.html'"></ng-include>
+<!-- TODO Show a ref-count (ref's in diet) for each food-item and only allow removal if ref-cont=0
+    When clicking the ref-count, show list of diets that use this food-item -> click diet to edit it (e.g. remove food-item)
+-->
+<h3 class="form-horizontal-header">Voeder-producten</h3>
+
+<form role="form" class="form-horizontal">
+    <div class="form-group form-group-sm">
+        <div class="col-sm-offset-4 col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-search"></span>
+                </div>
+                <input class="form-control"
+                       type="text"
+                       ng-model="searchValue"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="control-label col-sm-offset-3 col-sm-1">Totaal:
+            {{foods.length || 0}}</label>
+    </div>
+
+    <scrollable-table watch="appData" style="height: 510px">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Systeem ID</th>
+                <th>Naam</th>
+                <th>Afkorting</th>
+                <th>Eenheidsmaat</th>
+                <th>Voorbereiden</th>
+                <th>Restbeheer</th>
+                <th>Extra</th>
+                <th>
+                    <div class="nhc-clickable"
+                         ng-click="create($event)">
+                        <label class="command-icon fa fa-plus-square fa-fw"
+                               aria-hidden="true"></label>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="nhc-clickable"
+                ng-click="update($event, item)"
+                ng-repeat="item in foods | filter : searchValue | orderBy : 'name' track by $index">
+                <td ng-bind="item.id"></td>
+                <td ng-bind="item.name"></td>
+                <td ng-bind="item.short_name"></td>
+                <td>
+                    <span ng-repeat="measure in measures | filter:{'id': item.feeding_measure}"
+                          ng-bind="measure.name"></span>
+                </td>
+                <td>
+                    <span ng-if="item.prepare === 1"
+                          class="fa fa-check fa-fw"></span>
+                </td>
+                <td>
+                    <span ng-if="item.leftover_logging === 1"
+                          class="fa fa-check fa-fw"></span>
+                </td>
+                <td ng-bind="item.extra_quantity"></td>
+
+                <td class="nhc-clickable">
+                    <span ng-click="delete($event, item)"
+                          class="command-icon fa fa-trash fa-fw">
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </scrollable-table>
+</form>

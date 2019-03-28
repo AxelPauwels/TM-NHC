@@ -1,0 +1,31 @@
+<div class="col-xs-12">
+  <ngx-loading [show]="loading" [config]="{backdropBorderRadius: '14px'}"></ngx-loading>
+  <form class="form-horizontal task">
+    <div class="row">
+      <div [ngClass]="{'col-xs-9': task.information, 'col-xs-12': !task.information}">
+        <i class="fa fa-circle" [ngClass]="{'text-danger': !task.date_completed, 'text-success': task.date_completed}"></i> <span *ngIf="!isSameDate(task.date_created)">{{task.date_created | date:'shortDate' }}</span> <span>{{task.name}}</span>
+      </div>
+      <div class="col-xs-3 text-right" *ngIf="task.information">
+        <i class="fa fa-info-circle" aria-disabled="true"
+           #pop="bs-popover"
+           triggers=""
+           container="body"
+           (click)="pop.show()"
+           [popover]="task.information"
+           popoverTitle="Extra informatie"
+           [outsideClick]="true" ></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="input-group" *ngIf="!task.date_completed">
+          <input name="staff_name" class="form-control" placeholder="naam" [(ngModel)]="task.staff_name">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="button" (click)="onClickSave()" [disabled]="task.staff_name == undefined || task.staff_name.trim() === ''"><i class="fa fa-save"></i></button>
+          </span>
+        </div>
+        <span *ngIf="task.date_completed">{{task.staff_name}} {{task.date_completed | date:'HH:mm dd/MM/yy'}}</span>
+      </div>
+    </div>
+  </form>
+</div>

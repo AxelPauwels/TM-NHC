@@ -1,0 +1,32 @@
+<nhc-force-security-reset></nhc-force-security-reset>
+<h3 class="form-horizontal-header">Geplande taken</h3>
+<div class="clearfix">
+    <form role="form" class="form-horizontal">
+    <table ng-show="tasks && tasks.length > 0" class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Omschrijving</th>
+            <th>Wanneer</th>
+            <th>Uitvoerder</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="task in tasks | filter : searchValue"
+            class="nhc-clickable" ng-click="view(task)">
+            <td ng-bind="task.description"></td>
+            <td ng-bind="task.more_info"></td>
+            <td ng-click="prevention($event)">
+                <input class="form-control input-sm"
+                       ng-model="task.executors" ng-change="save(task)"
+                       ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"/>
+            </td>
+            <td ng-click="endTask(task); prevention($event)">
+                <span class="fa fa-trash fa-fw"></span>
+                <span>Taak afsluiten</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+</div>

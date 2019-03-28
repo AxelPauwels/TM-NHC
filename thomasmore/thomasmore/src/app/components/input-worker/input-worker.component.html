@@ -1,0 +1,50 @@
+<div class="modal-content input">
+  <div class="modal-header">
+    <h3>Aanwezigheid registreren</h3>
+  </div>
+
+  <div class="modal-body">
+
+    <form class="form-horizontal">
+
+      <div class="form-group form-group-sm memes">
+        <label for="name" class="col-sm-2">Naam</label>
+        <div class="col-sm-10">
+          <input name="name" id="name" type="text" class="form-control" [(ngModel)]="name">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm" *ngFor="let werkdag of werkDagen; let i = index">
+
+        <label for="date{{i}}" class="col-sm-2">Datum</label>
+        <div class="col-sm-4">
+          <!--input name="date{{i}}" id="date{{i}}" type="date" class="form-control" [(ngModel)]="werkdag.date"-->
+          <my-date-picker id="date{{i}}"[options]="myDatePickerOptions" name="date{{i}}" [(ngModel)]="werkdag.date"></my-date-picker>
+        </div>
+
+        <label for="vm{{i}}" class="col-sm-2">voormiddag</label>
+        <div class="col-sm-1">
+          <input name="voormiddag{{i}}" id="vm{{i}}" type="checkbox" class="" [(ngModel)]="werkdag.voormiddag">
+        </div>
+
+        <label for="nm{{i}}" class="col-sm-2">namiddag</label>
+        <div class="col-sm-1">
+          <input name="voormiddag{{i}}" id="nm{{i}}" type="checkbox" class="" [(ngModel)]="werkdag.namiddag">
+        </div>
+
+      </div>
+
+      <div class="form-group text-center">
+        <button class="btn nhc-btn" (click)="onAddDay()"> Dag toevoegen</button>
+        <button class="btn nhc-btn" (click)="onRemoveDay()"> Dag verwijderen</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn nhc-btn" [disabled]="!validateForm()" (click)="onSubmit()">Submit</button>
+    <button class="btn nhc-btn" (click)="onCancel()">annuleren</button>
+  </div>
+
+</div>

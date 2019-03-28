@@ -1,0 +1,16 @@
+<!--HTML-->
+<div class="row">
+  <div class="form-horizontal jum">
+    <div *ngIf="showChart1" class="col-12 col-xs-10 col-md-10 col-xs-push-1 col-md-push-1">
+      <canvas baseChart 
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+      (chartHover)="chartHovered($event)" 
+      (chartClick)="chartClicked($event)"
+      class="chart"></canvas>
+    </div>
+  </div>
+</div>

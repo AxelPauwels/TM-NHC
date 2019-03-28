@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h3 class="form-horizontal-header">Voedselresten&nbsp;<span
+            ng-if="!appform.$pristine"
+            class="fa fa-pencil"></span></h3>
+</div>
+
+<div class="modal-body">
+    <form name="appform"
+          role="form"
+          class="form-horizontal">
+        <div class="modal-body">
+
+            <div class="form-group form-group-sm">
+                <label class="col-sm-4 control-label">Kooi</label>
+                <div class="col-sm-5">
+                    <select class="form-control"
+                            ng-model="selectedCage.id"
+                            ng-options="cage.id as cage.name for cage in leftoverLoggingCages | orderBy : ['route', 'name']"></select>
+                </div>
+            </div>
+
+            <div ng-repeat="cage in leftoverLoggingCages | filter:{'id': selectedCage.id}">
+
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-4 control-label">Aantal resten</label>
+                    <div class="col-sm-5">
+                        <input class="form-control"
+                               type="number" min="0"
+                               ng-model="cage.leftover.quantity"
+                               placeholder="0" ng-virtual-keyboard>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-4 control-label">Aantal
+                        gevoederd</label>
+                    <div class="col-sm-5">
+                        <div class="form-control-static"
+                             ng-bind="cage.leftover.menu_quantity">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-4 control-label">Aantal dieren</label>
+                    <div class="col-sm-5">
+                        <div class="form-control-static"
+                             ng-bind="cage.leftover.animal_count">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-if="!appform.$pristine"
+            class="btn nhc-btn" ng-click="ok()">Bewaren
+    </button>
+    <button class="btn nhc-btn" ng-click="cancel()">Annuleren</button>
+</div>

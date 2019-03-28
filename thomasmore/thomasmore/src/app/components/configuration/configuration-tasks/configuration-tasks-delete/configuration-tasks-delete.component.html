@@ -1,0 +1,6 @@
+<div class="modal-body" *ngIf="taskV2Model != undefined">
+  <p>Ben je zeker dat je de herhalende taak '{{taskV2Model.name}}' wil verwijderen?</p>
+  <p><strong>Alle aangemaakte taken die tot deze herhalende taak behoren zullen ook worden verwijderd!</strong></p>
+  <button type="button" class="btn btn-success" (click)="onConfirm()"><i class="fa fa-trash"></i>&nbsp;Ja</button>
+  <button type="button" class="btn btn-success" (click)="onCancel()"><i class="fa fa-remove"></i>&nbsp;Nee</button>&nbsp;
+</div>

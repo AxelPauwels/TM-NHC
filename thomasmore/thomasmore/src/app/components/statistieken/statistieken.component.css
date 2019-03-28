@@ -1,0 +1,26 @@
+.jum{
+  min-width: 100% !important;
+  max-width: 100% !important;
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+}
+
+.tableScroll{
+  height: 60vh;
+  overflow:auto;
+}
+
+td, th {
+  max-width: 40px !important;
+}
+
+button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.chart{
+  background-color: white;
+  margin: 5px;
+}

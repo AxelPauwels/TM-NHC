@@ -1,0 +1,18 @@
+<div class="modal-body">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3"> 
+      <div class="form-group">
+        <label>Toegangscode *</label>
+        <input type="password" class="form-control" [(ngModel)]="password" />
+        <br/>
+        <div class="alert alert-danger" *ngIf="errors > 0">
+          <strong>Geef een pincode in!</strong><ng-container *ngIf="errors > 1"> (x{{errors}})</ng-container>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-success" (click)="onCompleteAuth()"><i class="fa fa-save"></i>&nbsp;Bevestigen</button>
+        <button type="button" class="btn btn-success" (click)="onCancelAuth()"><i class="fa fa-remove"></i>&nbsp;Annuleren</button>
+      </div>
+    </div>
+  </div>
+</div>

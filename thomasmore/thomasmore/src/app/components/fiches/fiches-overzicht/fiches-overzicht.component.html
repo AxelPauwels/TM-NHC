@@ -1,0 +1,151 @@
+<div id="overzichtFiche">
+
+  <form [formGroup]="overzichtForm" class="form-horizontal fichesForm" id="ngOverzichtForm"
+        #documentEditForm="ngForm">
+          <span *ngIf="hospitalization && animal && entrance_reasons">
+
+    <div class="form-group">
+      <div class="col-xs-12 myDatePicker">
+        <label for="entrance">Datum</label>
+        <my-date-picker name="entrance"
+                        id="entrance"
+                        [options]="myDatePickerOptions"
+                        formControlName="entrance"></my-date-picker>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <label for="animal">Diersoort</label>
+        <select formControlName="animal"
+                name="animal"
+                class="form-control"
+                id="animal"
+                required>
+          <option value="0" selected disabled>Selecteer</option>
+          <option *ngFor="let animal of animals | async" [value]="animal?.id">{{animal?.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <label for="entrance_reason">Reden binnenkomst</label>
+        <select formControlName="entrance_reason"
+                name="entrance_reason"
+                class="form-control"
+                id="entrance_reason">
+          <option value="0" selected disabled>Selecteer</option>
+          <option *ngFor="let reason of  entrance_reasons | async" [value]="reason?.id">{{reason?.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <label for="origin">Vindplaats</label>
+        <input formControlName="origin"
+               name="origin"
+               class="form-control"
+               id="origin"
+               placeholder="Vindplaats"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <label for="id_number">Ring nr / Chip id</label>
+        <input formControlName="id_number"
+               name="id_number"
+               class="form-control"
+               id="id_number"
+               placeholder="Ring nr / Chip id"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <label for="sex">Geslacht</label>
+        <select formControlName="sex"
+                name="sex"
+                class="form-control"
+                id="sex">
+          <option value="0">Mannelijk</option>
+          <option value="1">Vrouwelijk</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+    <div class="col-xs-12">
+    <button style="margin-top:15px;margin-bottom:10px"
+            class="form-control saveButton" type="submit" (click)="onClick_overzichtOpslaan()">Wijziging opslaan</button>
+    </div>
+    </div>
+
+
+
+    <div class="gewichtComponent">
+<div class="tableScroll">
+      <table class="table table-condensed ng-scope">
+        <thead>
+        <tr>
+          <th>
+            <div class="th-inner" title="Datum" style="width: 70px;">
+              <div class="box">Datum</div>
+            </div>
+          </th>
+          <th>
+            <div class="th-inner" title="Gewicht (gram)" style="width: 59px;">
+              <div class="box">Gewicht (gram)</div>
+            </div>
+          </th>
+          <th>
+            <div class="th-inner" title="" style="width: 48px;">
+              <div class="box">
+                <div class="nhc-clickable" ng-click="showChart($event)">
+                  <label class="control-label fa fa-line-chart" aria-hidden="true"></label>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+          <td style="width: 150px">
+            <my-date-picker name="streefgewichtDatum"
+                            id="streefgewichtDatum"
+                            class="myDatePickerStreefgewicht"
+                            [options]="myDatePickerOptions"
+                            formControlName="streefgewichtDatum"></my-date-picker>
+          </td>
+          <td>
+            <input formControlName="streefgewicht"
+                   class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-valid-min"
+                   type="number" min="0" ng-virtual-keyboard=""
+                   vki_attached="true">
+          </td>
+          <td class="nhc-clickable">
+                  <span (click)="onClick_nieuwGewichtOpslaan()"
+                        class="command-icon fa fa-plus-square fa-fw"></span>
+          </td>
+        </tr>
+        <tr *ngFor=" let weight of weights">
+          <td style="padding-left: 12px">{{weight.date | date:'dd/MM/yyyy'}}</td>
+          <td colspan="2" style="padding-left: 12px">{{weight.grams}} gram</td>
+        </tr>
+        </tbody>
+
+      </table>
+      </div>
+        </div>
+          </span>
+  </form>
+
+
+
+</div>
+
+

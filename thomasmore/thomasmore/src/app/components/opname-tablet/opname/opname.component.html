@@ -1,0 +1,105 @@
+<div id="opnameTablet_opnameForm" class="opnameTabletContainer">
+
+  <div class="opnameTabletContent">
+    <form [formGroup]="opnameForm" class="form-horizontal" id="ngForm"
+          #documentEditForm="ngForm">
+      <div class="idLabel"><p>{{opnameNummer}}</p></div>
+
+      <div class="form-group">
+        <div class="col-xs-12 myDatePickerTablet">
+          <my-date-picker name="entrance"
+                          [options]="myDatePickerOptions"
+                          formControlName="entrance"></my-date-picker>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-8">
+          <select formControlName="animal"
+                  name="animal"
+                  class="form-control"
+                  id="animal"
+                  required>
+            <option value="0" selected disabled>Diersoort</option>
+            <option *ngFor="let animal of animals | async" [value]="animal?.id">{{animal?.name}}</option>
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </select>
+        </div>
+        <div class="nhc-clickable col-xs-4">
+          <input formControlName="quantity" type="number" ng-virtual-keyboard name="quantity" placeholder="Aantal"
+                 class="form-control"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <select formControlName="entrance_reason"
+                  name="entrance_reason"
+                  class="form-control"
+                  id="entrance_reason">
+            <option value="0" selected disabled>Reden binnenkomst</option>
+            <option *ngFor="let reason of  entrance_reasons | async" [value]="reason?.id">
+              {{reason?.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <input formControlName="origin"
+                 name="origin"
+                 class="form-control"
+                 id="origin"
+                 placeholder="Vindplaats"/>
+        </div>
+      </div>
+
+      <div class="form-group customCheckboxGroup">
+        <div class="col-xs-4" [attr._ngcontent-c4]="undefined">
+          <div class="customCheckbox" [attr._ngcontent-c4]="undefined">
+            <label for="status_code_checkbox" [attr._ngcontent-c4]="undefined">
+              <input type="checkbox"
+                     formControlName="status_code_checkbox"
+                     name="status_code_checkbox"
+                     id="status_code_checkbox" [attr._ngcontent-c4]="undefined">
+              Vrijgelaten</label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="customCheckbox" [attr._ngcontent-c4]="undefined">
+            <label for="just_comment_checkbox" [attr._ngcontent-c4]="undefined">
+              <input type="checkbox" (ngModelChange)="onCheckboxChange($event)"
+                     formControlName="just_comment_checkbox"
+                     name="just_comment_checkbox"
+                     id="just_comment_checkbox"
+                     [attr._ngcontent-c4]="undefined"/>
+              Extra Info</label>
+          </div>
+        </div>
+
+        <div *ngIf="showJust_comment" class="col-xs-4">
+          <input formControlName="just_comment"
+                 name="just_comment"
+                 class="form-control"
+                 id="just_comment"
+                 placeholder="Extra info ..."/>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+
+  <div class="opnameTabletFooter">
+    <div class="form-group ">
+      <div class="col-xs-12">
+        <button (click)="onClick_opnameOpslaan()" form="ngForm" [disabled]="!documentEditForm.form.valid"
+                name="opnameSubmit" type="button"
+                id="opnameSubmit" class="form-control opnameTabletSubmitButton">
+          Contactgegevens
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

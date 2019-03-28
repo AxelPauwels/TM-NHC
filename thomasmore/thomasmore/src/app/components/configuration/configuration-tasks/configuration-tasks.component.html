@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button  type="button" class="btn btn-success pull-right" (click)="onClickAdd()"><i class="fa fa-plus"></i>&nbsp;Nieuwe herhalende taak</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-responsive">
+      <thead>
+      <td>Systeemid</td>
+      <td>Naam</td>
+      <td>Categorie</td>
+      <td>Extra informatie</td>
+      <td>Herhalingspatroon</td>
+      <td></td>
+      </thead>
+      <tbody>
+      <tr *ngFor="let taskv2Model of taskV2Models">
+        <td>{{taskv2Model.id}}</td>
+        <td>{{taskv2Model.name}}</td>
+        <td>{{taskv2Model.categoryName}}</td>
+        <td>{{taskv2Model.information}}</td>
+        <td>{{taskv2Model.getResultString()}}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="onClickEdit(taskv2Model)"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-success" (click)="onClickDelete(taskv2Model)"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

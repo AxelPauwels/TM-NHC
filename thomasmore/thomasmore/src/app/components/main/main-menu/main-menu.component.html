@@ -1,0 +1,5 @@
+<div class="nhc-bar text-shadow-dark">
+  <perfect-scrollbar [usePSClass]="true" [config]="{suppressScrollY: true}">
+  <app-main-menu-item *ngFor="let action of menuActions" [action]="action" (click)="clickAction(action)"></app-main-menu-item>
+  </perfect-scrollbar>
+</div>

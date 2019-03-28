@@ -1,0 +1,24 @@
+<nhc-force-security-reset></nhc-force-security-reset>
+<h3 class="form-horizontal-header">Voedselresten</h3>
+
+<form role="form"
+      class="form-horizontal">
+
+    <div ng-controller="LeftoverController"
+         ng-init="leftoverType = 'popup';leftoverCage = cage">
+        <ng-include src="'/v2/wall/leftover_heading.html'"></ng-include>
+
+        <scrollable-table watch="appData"
+                          ng-if="dayLabels">
+
+            <ng-include src="'/v2/wall/leftover_content.html'"></ng-include>
+        </scrollable-table>
+    </div>
+
+    <div class="popover-content-footer">
+        <button class="btn nhc-btn btn-xs"
+                ng-click="popover.close($event, popover.leftover)">Sluiten
+        </button>
+    </div>
+
+</form>

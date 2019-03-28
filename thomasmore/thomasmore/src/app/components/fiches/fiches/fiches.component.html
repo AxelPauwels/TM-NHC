@@ -1,0 +1,28 @@
+<div id="fichesContainer" class="fichesContainer">
+  <div class="col-xs-12 fichesContainerContent">
+
+    <div class="modusInfo">
+      <h4 *ngIf="!updateModusIsGroep">SINGLE MODUS</h4>
+      <h4 *ngIf="updateModusIsGroep">GROEPS MODUS</h4>
+    </div>
+
+    <div class="col-xs-4">
+      <app-fiches-overzicht></app-fiches-overzicht>
+    </div>
+
+    <div class="col-xs-8">
+      <app-fiches-nazorg *ngIf="showNazorgFiche"></app-fiches-nazorg>
+      <app-fiches-medisch *ngIf="showMedischeFiche"></app-fiches-medisch>
+      <app-fiches-quarantaine *ngIf="showQuarantaineFiche"></app-fiches-quarantaine>
+
+      <div class="clearfix"></div>
+      <div class="col-xs-12" style="padding:0">
+        <app-fiches-navigatie></app-fiches-navigatie>
+      </div>
+      <div class="col-xs-12" style="padding:0">
+        <app-fiches-verplaatsacties></app-fiches-verplaatsacties>
+      </div>
+    </div>
+
+  </div>
+</div>

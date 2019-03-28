@@ -1,0 +1,27 @@
+.task-category {
+  margin-bottom: 1em;
+  padding: 0 0.1em 0 0.1em;
+  height: auto;
+}
+
+.task-category-header {
+  background-color: var(--input-bg-color);
+  margin: auto auto 0.1em auto;
+  font-size: large;
+  text-align: center;
+  padding: 0 16px 0 16px;
+  width: 85%;
+}
+
+.task-category-content {
+  margin: auto auto 0.1em auto;
+  width: 85%;
+}
+
+.task-category-content>.row {
+  height: calc((100vh - var(--actionbar-height) * 2));
+  max-height: calc((100vh - var(--actionbar-height) * 2));
+}
+
+
+

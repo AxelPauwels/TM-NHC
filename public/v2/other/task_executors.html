@@ -1,0 +1,115 @@
+<h3 class="form-horizontal-header">Uitvoerders</h3>
+<form role="form" class="form-horizontal">
+    <div class="form-group form-group-sm">
+        <label for="datepicker" class="col-sm-3 control-label">Datum</label>
+        <div class="col-sm-6">
+            <nhc-date-picker id="datepicker"
+                             nhc-date="forDate"></nhc-date-picker>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="rtbinnen" class="col-sm-3 control-label">Binnen</label>
+        <div class="col-sm-6">
+            <input id="rtbinnen" class="form-control"
+                   ng-model="taskSet.RTBINNEN.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.RTBINNEN)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="rtbos" class="col-sm-3 control-label">Bos</label>
+        <div class="col-sm-6">
+            <input id="rtbos" class="form-control"
+                   ng-model="taskSet.RTBOS.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.RTBOS)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="rtbuiten" class="col-sm-3 control-label">Buiten</label>
+        <div class="col-sm-6">
+            <input id="rtbuiten" class="form-control"
+                   ng-model="taskSet.RTBUITEN.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.RTBUITEN)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="rtmuis" class="col-sm-3 control-label">Muizenhok</label>
+        <div class="col-sm-6">
+            <input id="rtmuis" class="form-control"
+                   ng-model="taskSet.RTMUIS.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.RTMUIS)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="rtegel"
+               class="col-sm-3 control-label">Egelzolder</label>
+        <div class="col-sm-6">
+            <input id="rtegel" class="form-control"
+                   ng-model="taskSet.RTEGEL.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.RTEGEL)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="prex14" class="col-sm-3 control-label">Exoten
+            14u</label>
+        <div class="col-sm-6">
+            <input id="prex14" class="form-control"
+                   ng-model="taskSet.PREX14.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.PREX14)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="prex17" class="col-sm-3 control-label">Exoten
+            17u</label>
+        <div class="col-sm-6">
+            <input id="prex17" class="form-control"
+                   ng-model="taskSet.PREX17.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.PREX17)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="prku09" class="col-sm-3 control-label">Kuikens
+            9u</label>
+        <div class="col-sm-6">
+            <input id="prku09" class="form-control"
+                   ng-model="taskSet.PRKU09.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.PRKU09)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="prku17" class="col-sm-3 control-label">Kuikens
+            17u</label>
+        <div class="col-sm-6">
+            <input id="prku17" class="form-control"
+                   ng-model="taskSet.PRKU17.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.PRKU17)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="prandere" class="col-sm-3 control-label">Andere</label>
+        <div class="col-sm-6">
+            <input id="prandere" class="form-control"
+                   ng-model="taskSet.PRANDERE.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.PRANDERE)"/>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="uitleggen"
+               class="col-sm-3 control-label">Uitleggen</label>
+        <div class="col-sm-6">
+            <input id="uitleggen" class="form-control"
+                   ng-model="taskSet.UITLEG.task_executors"
+                   ng-model-options="{updateOn: 'default', debounce:{'default': 750}}"
+                   ng-change="save(taskSet.UITLEG)"/>
+        </div>
+    </div>
+</form>

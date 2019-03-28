@@ -1,0 +1,39 @@
+<!-- public/v2/wall/cage_content_popover.html -->
+<div>
+    <div class="popover-content-header form-horizontal-header">
+        <span class="nhc-cage-label nhc-cage-header"
+              ng-class="css"
+              ng-style="{color: cage.color}"
+              ng-bind="cage.name">
+        </span>
+    </div>
+
+    <span class="list-group nhc-clickable"
+          ng-click="selectFiche($event, guest)"
+          ng-repeat="guest in cage.fiches">
+        <span class="list-group-item list-group-item-heading">{{guest.name}} ({{guest.quantity}})
+        </span>
+        <span class="list-group-item"
+              ng-if="guest.origin">
+            <span class="fa fa-map-marker fa-fw"></span>&nbsp; {{guest.origin}}
+        </span>
+        <!-- TODO: Update the span below to show the most current weight-measurement -->
+        <!--<span class="list-group-item" ng-if="guest.weight_in_grams"><span-->
+                <!--class="fa fa-balance-scale fa-fw"-->
+                <!--aria-hidden="true"></span>&nbsp; {{guest.weight_in_grams}} gr.-->
+        <!--</span>-->
+        <span class="list-group-item"
+              ng-if="guest.id_number">
+            <span class="fa fa-id-card-o fa-fw"></span>&nbsp; {{guest.id_number}}
+        </span>
+        <span class="list-group-item"
+              ng-if="guest.just_comment">
+            <span class="fa fa-info-circle fa-fw"></span>&nbsp; {{guest.just_comment}}
+        </span>
+    </span>
+
+    <div class="popover-content-footer">
+        <button class="btn nhc-btn btn-xs"
+                ng-click="popover.close($event, popover.contents)">Sluiten</button>
+    </div>
+</div>

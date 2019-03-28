@@ -1,0 +1,145 @@
+#!/bin/sh
+# https://github.com/chovy/node-startup
+
+################################################################################
+# Config
+#
+APP_NAME="nhc-app"
+USER="admin"
+GROUP="staff"
+NODE_ENV="development"
+PORT="3000"
+APP_DIR="/mnt/sdb2/data/nhc_app"
+NODE_APP="bin/www"
+KWARGS=""
+NODE_CONFIG_DIR="${APP_DIR}/config"
+PID_DIR="${APP_DIR}/run"
+PID_FILE="${PID_DIR}/${APP_NAME}.pid"
+LOG_DIR="${APP_DIR}/log"
+LOG_FILE="/dev/null"
+ERR_LOG_FILE="${LOG_DIR}/${APP_NAME}.err.log"
+# TODO absolute path needed ???
+# NODE_EXEC=$(which node)
+NODE_EXEC=/usr/local/bin/node
+
+################################################################################
+usage() {
+    echo "Usage: $0 {start|stop|restart|status}"
+    return 1
+}
+
+pid_file_exists() {
+    [ -f "${PID_FILE}" ]
+}
+
+get_pid() {
+    cat "${PID_FILE}"
+}
+
+is_running() {
+    # Use busybox ps to only output the pid
+    [ -n "$(busybox ps -o pid | grep "^\s*$(get_pid)$")" ]
+}
+
+start_it() {
+    mkdir -p "${PID_DIR}"
+    chown ${USER}:${GROUP} "${PID_DIR}"
+    mkdir -p "${LOG_DIR}"
+    chown ${USER}:${GROUP} "${LOG_DIR}"
+
+    echo "Starting ${APP_NAME}..."
+    echo "cd ${APP_DIR} && (PORT=${PORT} NODE_ENV=${NODE_ENV} NODE_CONFIG_DIR=${NODE_CONFIG_DIR} ${NODE_EXEC} ${APP_DIR}/${NODE_APP} ${KWARGS} 1>${LOG_FILE} 2>${ERR_LOG_FILE} & echo \$! > ${PID_FILE})" | sudo -i -u ${USER}
+    if is_running; then
+        echo "${APP_NAME} started with pid $(get_pid)"
+    else
+        echo "Unable to start ${APP_NAME}"
+        return 2
+    fi
+}
+
+stop_process() {
+    kill $(get_pid)
+}
+
+remove_pid_file() {
+    rm -f "${PID_FILE}"
+}
+
+start_app() {
+    if ! pid_file_exists; then
+        start_it
+    else
+        if ! is_running; then
+            echo "${APP_NAME} not running, removing stale pid file ${PID_FILE}"
+            remove_pid_file
+            start_it
+        else
+            echo "${APP_NAME} already running with pid $(get_pid)"
+            return 1
+        fi
+    fi
+}
+
+stop_app() {
+    if pid_file_exists; then
+        if is_running; then
+            echo -n "Stopping ${APP_NAME} with pid $(get_pid).."
+            stop_process
+            for i in 1 2 3 4 5 6 7 8 9 10; do
+                echo -n "."
+                if ! is_running; then
+                    break
+                fi
+                sleep 1
+            done
+            echo
+            if ! is_running; then
+                remove_pid_file
+                echo "${APP_NAME} stopped"
+            else
+                echo "Unable to stop ${APP_NAME} with pid $(get_pid)"
+                return 2
+            fi
+        else
+            echo "${APP_NAME} already stopped, removing stale pid file ${PID_FILE}"
+            remove_pid_file
+            return 1
+        fi
+    else
+        echo "${APP_NAME} already stopped"
+        return 1
+    fi
+}
+
+status_app() {
+    if pid_file_exists && is_running; then
+        echo "${APP_NAME} running with pid $(get_pid)"
+    else
+        echo "${APP_NAME} stopped"
+    fi
+}
+################################################################################
+# Main
+#
+case "$1" in
+    start)
+        start_app
+        ;;
+    stop)
+        stop_app
+        ;;
+    restart)
+        stop_app
+        rcode=$?
+        if [ ${rcode} -eq 2 ]; then
+            return ${rcode}
+        fi
+        start_app
+        ;;
+    status)
+        status_app
+        ;;
+    *)
+        usage
+        ;;
+esac

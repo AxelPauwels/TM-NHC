@@ -1,0 +1,232 @@
+
+
+
+
+
+
+
+
+
+
+/*ONDERSTAANDE IS ORIGINAL OLD*/
+
+
+/*div#fichesDier {*/
+  /*!*height: 90% !important;*!*/
+/*}*/
+
+/*!*page-content*!*/
+/*div#fichesDier div.fichesDierContent {*/
+  /*height: 100% !important;*/
+  /*padding: 0px !important;*/
+/*}*/
+
+/*!*form*!*/
+/*div#fichesDier form {*/
+  /*min-height: 450px !important;*/
+  /*!*min-height: 575px !important;*!*/
+/*}*/
+
+/*div#fichesDier .form-group {*/
+  /*margin-bottom: 10px !important;*/
+/*}*/
+
+/*div#fichesDier .form-horizontal {*/
+  /*margin-top: 20px;*/
+  /*width: 100% !important;*/
+  /*height: 100% !important;*/
+/*}*/
+
+/*div#fichesDier .form-control {*/
+  /*font-size: 14px !important;*/
+  /*height: 30px !important;*/
+  /*-webkit-appearance: none !important;*/
+  /*-moz-appearance: none !important;*/
+/*}*/
+
+/*div#fichesDier div#nazorgFiche div.form-group {*/
+  /*!*todo: CHANGE THIS FOR 3/4 SCREEN-VIEW*!*/
+  /*!*width: 75% !important;*!*/
+  /*width: auto !important;*/
+/*}*/
+
+/*div#fichesDier div#nazorgFiche button.kooiInfoButton {*/
+  /*width: 40px;*/
+  /*border-radius: 0px 4px 4px 0px !important;*/
+  /*margin-left: -1px !important;*/
+/*}*/
+
+/*div#fichesDier div#nazorgFiche button.kooiInfoButton > i {*/
+  /*color: black;*/
+/*}*/
+
+/*div#fichesDier label {*/
+  /*margin: 0 !important;*/
+  /*color: var(--off-black);*/
+  /*font-weight: normal !important;*/
+  /*!*color: black;*!*/
+/*}*/
+
+/*!*textarea*!*/
+/*div#fichesDier div#nazorgFiche textarea {*/
+  /*height: 100px !important;*/
+/*}*/
+
+/*!*dropdown*!*/
+/*div#fichesDier select {*/
+  /*background-image: url(../../../../assets/images/caret-down.png);*/
+  /*-webkit-background-size: 10px;*/
+  /*background-size: 10px;*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: 98% 50%;*/
+/*}*/
+
+/*!*navigatieButtons (switch tussen fiches)*!*/
+/*div#fichesDier div.navigatieButtonGroup {*/
+  /*padding: 0;*/
+  /*margin: 0;*/
+  /*margin-top: 20px;*/
+  /*text-align: center;*/
+/*}*/
+
+/*div#fichesDier div.navigatieButtonGroup > div {*/
+  /*display: inline-block;*/
+  /*width: 32.75%;*/
+
+/*}*/
+
+/*div#fichesDier div.navigatieButtonGroup button {*/
+  /*display: block;*/
+  /*width: 100%;*/
+  /*margin-left: 0;*/
+  /*margin-right: 0;*/
+  /*padding-left: 0;*/
+  /*padding-right: 0;*/
+  /*border-radius: 4px;*/
+  /*height: 30px;*/
+  /*!*background-color: var(--button-bg-color) !important;*!*/
+  /*background-color: var(--main-bg-color);*/
+  /*filter: brightness(90%);*/
+  /*outline: none;*/
+/*}*/
+
+/*div#fichesDier div.navigatieButtonGroup button.active {*/
+  /*border-color: lightgrey;*/
+  /*background-color: var(--main-bg-color);*/
+  /*filter: brightness(101%);*/
+/*}*/
+
+/*!*gewichten component*!*/
+/*div#fichesDier div.gewichtComponent {*/
+  /*margin-top: 20px;*/
+  /*margin-bottom: 20px;*/
+/*}*/
+
+/*div#fichesDier div.gewichtComponent table {*/
+  /*margin-bottom: 0;*/
+/*}*/
+
+/*div#fichesDier div.gewichtComponent div.nhc-clickable {*/
+  /*text-align: center;*/
+/*}*/
+
+/*div#fichesDier div.gewichtComponent .table > thead > tr > th {*/
+  /*border-radius: 0;*/
+/*}*/
+
+/*!*form - placeholder color*!*/
+/*::-webkit-input-placeholder { !* Chrome/Opera/Safari *!*/
+  /*color: var(--off-white);*/
+/*}*/
+
+/*::-moz-placeholder { !* Firefox 19+ *!*/
+  /*color: var(--off-white);*/
+/*}*/
+
+/*:-ms-input-placeholder { !* IE 10+ *!*/
+  /*color: var(--off-white);*/
+/*}*/
+
+/*:-moz-placeholder { !* Firefox 18- *!*/
+  /*color: var(--off-white);*/
+/*}*/
+
+/*!*MEDISCHE FISCHE ----------------------------------*!*/
+
+
+/*#ngOverzichtForm > div:nth-child(6) > div > label{*/
+  /*font-size: 50px !important;*/
+/*}*/
+
+
+
+
+/*!*medischeFicheButtons*!*/
+/*div#fichesDier div.medischeFicheButtonGroup {*/
+  /*padding: 0;*/
+  /*padding-top: 15px !important;*/
+  /*margin: 0;*/
+  /*!*margin-top: 10px;*!*/
+  /*!*text-align: left;*!*/
+/*}*/
+
+/*div#fichesDier div.medischeFicheButtonGroup > div {*/
+  /*display: inline-block;*/
+  /*width: 24.60%;*/
+/*}*/
+
+/*div#fichesDier div.medischeFicheButtonGroup button {*/
+  /*!*display: block;*!*/
+  /*width: 100%;*/
+  /*!*margin-left: 0;*!*/
+  /*!*margin-right: 0;*!*/
+  /*border-radius: 4px;*/
+  /*height: var(--input-height);*/
+  /*background-color: var(--button-bg-color) !important;*/
+  /*outline: none;*/
+/*}*/
+
+/*!*medisheFiche table*!*/
+/*div#medicheFiche table {*/
+  /*width: 100%;*/
+/*}*/
+
+/*div#medicheFiche thead,*/
+/*div#medicheFiche tbody,*/
+/*div#medicheFiche tr,*/
+/*div#medicheFiche*/
+/*td, div#medicheFiche th {*/
+  /*display: block;*/
+/*}*/
+
+/*div#medicheFiche tr:after {*/
+  /*content: ' ';*/
+  /*display: block;*/
+  /*visibility: hidden;*/
+  /*clear: both;*/
+/*}*/
+
+/*div#medicheFiche thead th {*/
+  /*height: 30px;*/
+  /*!*text-align: left;*!*/
+/*}*/
+
+/*div#medicheFiche tbody {*/
+  /*height: 200px;*/
+  /*overflow-y: scroll;*/
+/*}*/
+
+/*div#medicheFiche thead {*/
+  /*!* fallback *!*/
+/*}*/
+
+/*div#medicheFiche tbody td,*/
+/*div#medicheFiche thead th {*/
+  /*width: 33.33%;*/
+  /*float: left;*/
+  /*border-radius: 0;*/
+/*}*/
+
+/*div#medicheFiche .table-hover > tbody > tr:hover {*/
+  /*color: var(--off-black);*/
+/*}*/

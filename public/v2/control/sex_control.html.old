@@ -1,0 +1,5 @@
+<div ng-click="click($event)" class="form-control">
+	<span ng-if="!model || model == '0'" class="fa fa-ban fa-fw"></span>
+	<span ng-if="model == 'M'" class="fa fa-mars fa-fw"></span>
+	<span ng-if="model == 'V'" class="fa fa-venus fa-fw"></span>
+</div>

@@ -1,0 +1,87 @@
+#!/usr/bin/env node
+
+var logger = require('../logic/log-util');
+var appPkg = require('../package');
+logger.info("Starting %s version %s", appPkg.name, appPkg.version);
+
+/**
+ * Module dependencies.
+ */
+var app = require('../app');
+var http = require('http');
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+/**
+ * Get port from environment and store in Express.
+ */
+var port = normalizePort(process.env.PORT || '3000');
+logger.debug("Set server port to: " + port);
+app.set('port', port);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+logger.info("Starting web server...");
+server.on('error', onError);
+server.on('listening', onListening);
+server.listen(port);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+    logger.error("Web server error: %s", error.name, error);
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port === 'string' ? 'pipe ' + port : 'port ' + port;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            logger.error('Web server %s requires elevated privileges', bind);
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            logger.error('Web server %s is already in use', bind);
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
+        'pipe ' + addr :
+        'IP ' + addr.address + ':' + addr.port;
+    logger.info("Web server listening on %s", bind);
+}

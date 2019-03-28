@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<!-- views/index.ejs -->
+<html lang="nl">
+<head>
+    <% include head %>
+</head>
+<body ng-app="nhcBoard">
+    <% include main %>
+</body>
+</html>  

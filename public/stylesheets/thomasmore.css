@@ -1,0 +1,13 @@
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hideOpnameBtnTablet {
+        /*background-color: blue;*/
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hideOpnameBtnPC {
+        /*background-color: red;*/
+        display: none;
+    }
+}

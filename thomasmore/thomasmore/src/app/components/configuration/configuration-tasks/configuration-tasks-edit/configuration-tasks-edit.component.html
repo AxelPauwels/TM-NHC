@@ -1,0 +1,71 @@
+<div class="modal-body full-form-width">
+  <div class="row" *ngIf="initialLoadCompleted && taskV2Categories.length > 0">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label>
+          Naam *
+          <input type="text" [(ngModel)]="taskV2Model.name" class="form-control" />
+        </label>
+        <label style="color: red;" *ngIf="!isValidName()">Dit veld is verplicht!</label>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Categorie
+          <ng-select [items]="taskV2Categories" (selected)="onSelectTaskV2Category($event)" [active]="[selectedTaskV2Category]"></ng-select>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Extra informatie
+          <textarea class="form-control" [(ngModel)]="taskV2Model.information"></textarea>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Herhalingstype
+          <ng-select [items]="recurModels" (selected)="onSelectRecurModel($event)" [active]="[selectedRecurModel]"></ng-select>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Herhalingsfactor
+          <input type="number" class="form-control" [(ngModel)]="taskV2Model.recurMultiplier"  />
+        </label>
+      </div>
+
+      <div class="form-group" *ngIf="selectedRecurModel.id == 4">
+        <label>
+          Maand
+          <ng-select [items]="recurMonths" (selected)="onSelectRecurMonth($event)" [active]="[selectedRecurMonth]"></ng-select>
+        </label>
+      </div>
+
+      <div class="form-group" *ngIf="selectedRecurModel.id != 1">
+        <label>
+          Dag
+          <ng-select [items]="recurDays" (selected)="onSelectRecurDay($event)" [active]="[selectedRecurDay]"></ng-select>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Deze taak zal zich volgens volgend patroon herhalen:</label>
+        <label>{{getRecurString()}}</label>
+      </div>
+
+      <div class="form-group pull-right">
+        <button type="button" class="btn btn-success" (click)="onClickSave()" [disabled]="!isValidName()"><i class="fa fa-save"></i>&nbsp; Opslaan</button>
+        <button type="button" class="btn btn-success" (click)="onClickCancel()"><i class="fa fa-remove"></i>&nbsp; Annuleren</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="initialLoadCompleted && taskV2Categories.length == 0">
+    <div class="col-xs-12 text-center">
+      <button type="button" class="btn btn-success" (click)="onClickCancel()" routerLink="/configuratie/taakcategorie">Voeg eerst hier een categorie toe!</button>
+    </div>
+  </div>
+</div>

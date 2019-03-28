@@ -1,0 +1,21 @@
+<div class="modal-body">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <div class="form-group">
+        <label>Huidig aantal bakken: {{numberOfContainers}}</label>
+      </div>
+      <div class="form-group">
+        <label>Nieuw aantal bakken *</label>
+        <input type="number" class="form-control" [(ngModel)]="newNumberOfContainers" />
+        <label style="color: red" *ngIf="!isValid()">Geef een geldig getal in!</label>
+      </div>
+      <div class="form-group" *ngIf="isValid() && numberOfContainers > newNumberOfContainers">
+        <label>LET OP: bakken {{newNumberOfContainers+1}} tot en met {{numberOfContainers}} zullen worden verwijderd!</label>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-success" [disabled]="!isValid()" (click)="onSaveNumberOfContainers()"><i class="fa fa-save"></i>&nbsp;Opslaan</button>
+        <button type="button" class="btn btn-success" (click)="onCancel()"><i class="fa fa-remove"></i>&nbsp;Annuleren</button>
+      </div>
+    </div>
+  </div>
+</div>

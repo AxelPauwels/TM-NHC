@@ -1,0 +1,179 @@
+<!-- public/v2/wall/cage.html -->
+<!-- TODO Move style to CSS -->
+<div ng-click="selectCage($event, cage)"
+     class="nhc-cage"
+     ng-class="{'selected-cage': cage.__selected, 'empty-cage':cage.empty, 'nhc-cage-wide': cage.wide || cage.special_wide}">
+    <!-- TODO Move styling to CSS -->
+
+    <div class="nhc-cage-remark"
+         ng-if="cage.lateEater">
+        <span>17u</span>
+    </div>
+
+    <div class="nhc-cage-header"
+         ng-class="css">
+        <span ng-bind="cage.name"></span>
+    </div>
+
+    <div class="nhc-cage-content"
+         ng-class="{'nhc-cage-content-fixed': !cage.special_wide}">
+        <div class="nhc-cage-species"
+             ng-repeat="animal in cage.animals1">
+            <span ng-bind="animal.group_name"></span>
+            <span ng-bind="'(' + animal.quantity + ')'"></span>
+        </div>
+        <div class="nhc-cage-meal"
+             ng-if="showMeal">
+            <!--ng-class="{'nhc-cage-meal-10': showWarnings}">-->
+            <table>
+                <tr ng-repeat="menu in cage.menu1">
+                    <td style="vertical-align: top;white-space: nowrap;"
+                        ng-if="menu.short_measure_name != '---'">
+                        <span ng-bind="menu.quantity"
+                              ng-if="menu.short_measure_name != 'Extra:'"></span>
+                        <span ng-bind="menu.short_measure_name"></span>
+                    </td>
+                    <td style=";min-width:30px;vertical-align: top;"
+                        ng-if="menu.short_measure_name != '---'">
+                        <span style="padding-left:2px"
+                              ng-bind="menu.short_food_name || menu.food_name"></span>
+                    </td>
+                    <td colspan="2" ng-if="menu.short_measure_name == '---'">
+                        <span ng-bind="menu.short_food_name || menu.food_name"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- TODO Find solution for multiple cage.medication's per cage
+            1. aggregate, similar to food per cage (is it possible ???)
+            2. just list in cage area (is cage area big enough ???)
+            3. put in cage-med popup, like cage-info popup (i.e. show med per animal in popup)
+        -->
+        <div class="nhc-cage-meal"
+             ng-repeat="med in cage.medication track by $index"
+             ng-if="showMedication">
+            <span>&lt;{{$index + 1}}&gt; {{med}}</span>
+        </div>
+    </div>
+
+    <div class="nhc-cage-content"
+         ng-if="cage.sectionCount > 1">
+        <div class="nhc-cage-species"
+             ng-repeat="animal in cage.animals2">
+            <span ng-bind="animal.group_name"></span>
+            <span ng-bind="'(' + animal.quantity + ')'"></span>
+        </div>
+        <div class="nhc-cage-meal"
+             ng-if="showMeal">
+            <!--ng-class="{'nhc-cage-meal-10': showWarnings}">-->
+            <table>
+                <tr ng-repeat="menu in cage.menu2">
+                    <td style="vertical-align: top;white-space: nowrap;"
+                        ng-if="menu.short_measure_name != '---'">
+                        <span ng-bind="menu.quantity"
+                              ng-if="menu.short_measure_name != 'Extra:'"></span>
+                        <span ng-bind="menu.short_measure_name"></span>
+                    </td>
+                    <td style="vertical-align: top;"
+                        ng-if="menu.short_measure_name != '---'">
+                        <span style="padding-left:2px;"
+                              ng-bind="menu.short_food_name || menu.food_name"></span>
+                    </td>
+                    <td colspan="2"
+                        ng-if="menu.short_measure_name == '---'">
+                        <span ng-bind="menu.short_food_name || menu.food_name"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div ng-if="showWarnings">
+        <div class="nhc-cage-comment"
+             ng-if="cage.staffOnly">
+            <span class="fa fa-warning">&nbsp;Uitblijven!</span>
+        </div>
+        <div class="nhc-cage-comment"
+             ng-if="!cage.staffOnly && cage.dangerous">
+            <span class="fa fa-warning">&nbsp;Gevaarlijk!</span>
+        </div>
+        <div class="nhc-cage-comment"
+             ng-if="!cage.staffOnly && !cage.dangerous && cage.warning">
+            <span class="fa fa-warning">&nbsp;{{cage.warning}}</span>
+        </div>
+    </div>
+
+    <div class="nhc-cage-footer horizontal-flex-container"
+         ng-class="css">
+        <!--<span ng-if="!cage.empty && true"-->
+              <!--class="nhc-cage-lights nhc-clickable"-->
+              <!--ng-click="stopPropagation($event);">-->
+            <!--<span class="ion ion-ios-lightbulb"></span>-->
+        <!--</span>-->
+        <span ng-click="stopPropagation($event)"
+              ng-class="!(!cage.empty && cage.lights_on) && !(cage.empty && cage.to_clean) ? 'invisible' : ''">
+            <span ng-if="!cage.empty && cage.lights_on"
+                  class="nhc-cage-info nhc-cage-footer-item nhc-clickable"
+                  uib-popover-template="'/v2/wall/cage_lightson_popover.html'"
+                  popover-placement="{{popover.lightson.placement}}"
+                  popover-is-open="popover.lightson.isOpen"
+                  popover-trigger="'none'"
+                  ng-click="popover.toggle($event, popover.lightson)">
+                <span class="ion ion-ios-lightbulb"></span>
+            </span>
+            <span ng-if="cage.empty && cage.to_clean"
+                  class="nhc-cage-info nhc-cage-footer-item nhc-clickable"
+                  uib-popover-template="'/v2/wall/cage_clean_popover.html'"
+                  popover-placement="{{popover.clean.placement}}"
+                  popover-is-open="popover.clean.isOpen"
+                  popover-trigger="'none'"
+                  ng-click="popover.toggle($event, popover.clean)">
+                <span class="el el-broom"></span>
+            </span>
+            <span ng-if="!(!cage.empty && cage.lights_on) && !(cage.empty && cage.to_clean)"
+                  class="nhc-cage-info nhc-cage-footer-item nhc-clickable">
+                <span class="fa fa-circle-thin"></span>
+            </span>
+        </span>
+
+        <span ng-click="stopPropagation($event)">
+            <span ng-if="!cage.empty && cage.leftoverLogging"
+                  class="nhc-cage-info nhc-cage-footer-item nhc-clickable"
+                  uib-popover-template="'/v2/wall/cage_leftover_popover.html'"
+                  popover-placement="{{popover.leftover.placement}}"
+                  popover-is-open="popover.leftover.isOpen"
+                  popover-trigger="'none'"
+                  ng-click="popover.toggle($event, popover.leftover)">
+                  <!--ng-click="onLeftoverPopover($event, popover.leftover)">-->
+                <!--<span class="fa fa-arrow-circle-down"></span>-->
+                <span class="fa fa-share-square fa-rotate-90"></span>
+            </span>
+        </span>
+
+        <!--<nhc-popover ng-if="!cage.empty && false"-->
+                     <!--class="nhc-cage-medication nhc-cage-footer-item nhc-clickable"-->
+                     <!--nhc-template="/v2/wall/cage_content_popover.html"-->
+                     <!--ng-click="stopPropagation($event)">-->
+            <!--<span class="fa fa-medkit"></span>-->
+        <!--</nhc-popover>-->
+
+        <span ng-click="stopPropagation($event)">
+            <span ng-if="!cage.empty"
+                  class="nhc-cage-info nhc-cage-footer-item nhc-clickable"
+                  uib-popover-template="'/v2/wall/cage_contents_popover.html'"
+                  popover-placement="{{popover.contents.placement}}"
+                  popover-is-open="popover.contents.isOpen"
+                  popover-trigger="'none'"
+                  ng-click="popover.toggle($event, popover.contents)">
+                <span class="fa fa-info-circle"></span>
+            </span>
+        </span>
+
+        <!--<nhc-popover ng-if="!cage.empty && false"-->
+                     <!--class="nhc-cage-adoption nhc-cage-footer-item nhc-clickable"-->
+                     <!--nhc-template="/v2/wall/cage_content_popover.html"-->
+                     <!--ng-click="stopPropagation($event)">-->
+            <!--<span class="fa fa-user-circle-o"></span>-->
+        <!--</nhc-popover>-->
+    </div>
+</div>

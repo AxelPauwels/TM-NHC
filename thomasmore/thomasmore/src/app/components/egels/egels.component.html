@@ -1,0 +1,83 @@
+<script src="node_modules/chart.js/src/chart.js"></script>
+<div class="container egelswegen-container">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <div class="col-sm-4">
+        <label class="control-label">Selecteer baknummer</label>
+      </div>
+      <div class="col-sm-4">
+        <select name="bakken" id="bakken-select" class="form-control" (change)="changeContainerNumber($event)">
+          <option selected disabled>Selecteer een baknummer</option>
+          <option *ngFor="let container of containers">{{container.number}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <form class="form-horizontal" *ngIf="showLocationPicker">
+    <div class="form-group">
+      <div class="col-sm-4">
+        <label class="control-label">Selecteer egel locatie</label>
+      </div>
+      <div class="col-sm-4">
+        <select name="bakken" id="bakken-select" class="form-control" (change)="changeLocation($event)">
+          <option selected disabled>Selecteer locatie</option>
+          <option *ngFor="let container of selectedContainerInfo">{{container.name}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <form class="form-horizontal" *ngIf="showHedgeHogInfo">
+    <div class="form-group">
+      <div class="col-sm-12">
+        {{selectedHedgeHog.hospitalization}}
+      </div>
+      <div class="col-sm-push-4 col-sm-4">
+        <p style="font-size:250%;">{{weight}} g</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-6">
+          <button type="button" class="form-control" (click)="Tare()">Nulpunt</button>
+        </div>
+        <div class="col-xs-6">
+          <button type="button" class="form-control" (click)="saveWeight()">Gewicht Opslaan</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4">Gewicht (g)</div>
+      <div class="col-xs-4">Datum</div>
+    </div>
+    <div class="form-group" *ngFor="let weight of weightArray">
+      <div class="row">
+        <div class="col-xs-4">{{weight.grams}} g</div>
+        <div class="col-xs-4">{{weight.date}}</div>
+        <div class="col-xs-4">
+          <!--TODO: Knop verwijderen fixen-->
+          <button class="form-control" (click)="removeWeight(weight.id)">Verwijderen</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="row" style="display: block;" *ngIf="showChart">
+    <div class="col-xs-12 col-md-6 col-md-push-3">
+      <div style="display: block; background-color: white;">
+        <canvas baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

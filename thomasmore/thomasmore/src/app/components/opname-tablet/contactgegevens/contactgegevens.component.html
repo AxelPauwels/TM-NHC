@@ -1,0 +1,66 @@
+<div id="opnameTablet_contactgegevensForm" class="opnameTabletContainer">
+
+  <div class="opnameTabletContent">
+    <form [formGroup]="contactgegevensForm" class="form-horizontal" id="ngForm" #documentEditForm="ngForm">
+      <div class="idLabel"><p>{{opnameNummer}}</p></div>
+
+      <div class="form-group">
+        <div class="col-xs-12 ">
+          <input formControlName="name" type="text" id="name" name="name" placeholder="Naam" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-10">
+          <input formControlName="street" type="text" id="street" name="street" placeholder="Straat"
+                 class="form-control"/>
+        </div>
+        <div class="nhc-clickable col-xs-2">
+          <input formControlName="number" type="number" ng-virtual-keyboard id="number" name="number"
+                 placeholder="Nr." class="form-control"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-6">
+          <input formControlName="postal" type="number" ng-virtual-keyboard id="postal" name="postal"
+                 placeholder="Postcode" class="form-control"/>
+        </div>
+
+        <div class="col-xs-6">
+          <input formControlName="city" type="text" ng-virtual-keyboard id="city" name="city" placeholder="Stad"
+                 class="form-control"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <input ng-virtual-keyboard formControlName="email" type="email" id="email" name="email"
+                 placeholder="E-mailadres" class="form-control"/>
+        </div>
+      </div>
+
+      <div class="col-xs-12 customCheckboxGroup">
+        <div class="customCheckbox" [attr._ngcontent-c4]="undefined">
+          <label for="isLid_checkbox" [attr._ngcontent-c4]="undefined">
+            <input formControlName="isLid_checkbox" type="checkbox" id="isLid_checkbox" name="isLid_checkbox"
+                   [attr._ngcontent-c4]="undefined"/>
+            Bent u al lid ?</label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="opnameTabletFooter">
+    <div class="form-group ">
+      <div class="col-xs-12">
+        <button (click)="onClick_contactgegevensOpslaan()" form="ngForm" [disabled]="!documentEditForm.form.valid"
+                name="contactgegevensSubmit" type="button" id="contactgegevensSubmit"
+                class="form-control opnameTabletSubmitButton">
+          Bewaren
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

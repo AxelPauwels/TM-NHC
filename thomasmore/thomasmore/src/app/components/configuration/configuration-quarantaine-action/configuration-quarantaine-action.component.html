@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button  type="button" class="btn btn-success pull-right" (click)="onClickAdd()"><i class="fa fa-plus"></i>&nbsp;Nieuwe quarantaine handeling</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-responsive">
+      <thead>
+      <td>Systeemid</td>
+      <td>Naam</td>
+      <td></td>
+      </thead>
+      <tbody>
+      <tr *ngFor="let quarantaineAction of quarantaineActions | async">
+        <td>{{quarantaineAction.id}}</td>
+        <td>{{quarantaineAction.name}}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="onClickEdit(quarantaineAction)"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-success" (click)="onClickDelete(quarantaineAction)"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

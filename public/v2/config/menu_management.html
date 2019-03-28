@@ -1,0 +1,80 @@
+<nhc-secured-page nhc-role="'rlAdmin'"></nhc-secured-page>
+<ng-include src="'/v2/config/config_links.html'"></ng-include>
+<h3 class="form-horizontal-header">Menu's</h3>
+
+<form role="form" class="form-horizontal">
+    <div class="form-group form-group-sm">
+        <div class="col-sm-offset-4 col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-search"></span>
+                </div>
+                <input id="searchField"
+                       class="form-control"
+                       type="text"
+                       ng-model="searchValue"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="control-label col-sm-offset-3 col-sm-1">Totaal:
+            {{menus.length || 0}}</label>
+    </div>
+
+    <scrollable-table watch="appData" style="height: 510px">
+        <table class="table table-condensed table-row-grouping">
+            <thead>
+            <tr>
+                <th>Diersoort</th>
+                <th>Systeem ID</th>
+                <th>Voedsel</th>
+                <th>Hoeveelheid</th>
+                <th>Per x dieren</th>
+                <!--<th>Voederbord</th>-->
+                <th>
+                    <div class="nhc-clickable"
+                         ng-click="create($event)">
+                        <label class="command-icon fa fa-plus-square fa-fw"
+                               aria-hidden="true"></label>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="nhc-clickable"
+                ng-class="{'row-group-start': $first || filtered_menus[$index - 1].animal_name !== item.animal_name}"
+                ng-click="update($event, item)"
+                ng-repeat="item in menus | filter : searchValue | orderBy : ['animal_name', 'food_name'] as filtered_menus track by $index">
+                <td class="flex-container"
+                    ng-if="$first || filtered_menus[$index - 1].animal_name !== item.animal_name">
+                    <span class="col-sm-8 col-container"
+                          ng-bind="item.animal_name"></span>
+                    <span class="nhc-clickable col-sm-4 col-container"
+                          ng-click="create($event, item.animal)">
+                        <label class="command-icon fa fa-plus-square fa-fw"
+                               aria-hidden="true"></label>
+                    </span>
+                </td>
+                <td ng-if="!$first && filtered_menus[$index - 1].animal_name === item.animal_name">
+                    <span class="col-sm-offset-1 fa fa-reply fa-rotate-180"></span>
+                </td>
+                <td ng-bind="item.id"></td>
+                <td ng-bind="item.food_name"></td>
+                <td ng-bind="item.quantity"></td>
+                <td ng-bind="item.each"></td>
+                <!--<td>-->
+                    <!--<span ng-repeat="board in boards | filter:{'id': item.board}"-->
+                          <!--ng-bind="board.name">-->
+                    <!--</span>-->
+                <!--</td>-->
+                <td class="nhc-clickable">
+                    <span ng-click="delete($event, item)"
+                          class="command-icon fa fa-trash fa-fw">
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </scrollable-table>
+</form>

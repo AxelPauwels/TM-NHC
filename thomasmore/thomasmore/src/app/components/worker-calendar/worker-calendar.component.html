@@ -1,0 +1,38 @@
+<h1 class="form-horizontal-header">Planning vrijwilligers</h1>
+<h3 class="form-horizontal-header">
+  <div class="pull-left">
+    <button class="btn btn-success" (click)="previousClick()"><i class="fa fa-arrow-left"></i></button>
+    <button class="btn btn-success" (click)="todayClick()">Vandaag</button>
+    <button class="btn btn-success" (click)="nextClick()"><i class="fa fa-arrow-right"></i></button>
+  </div>
+
+  {{dateString}}
+
+  <div class="pull-right">
+    <button class="btn btn-success" (click)="addWorkerClick()"> Registreren</button>
+  </div>
+</h3>
+
+<div class="calendar">
+
+  <mwl-calendar-month-view
+    *ngIf="!dayEnabled"
+    [viewDate]="viewDate"
+    (dayClicked)="dayClicked($event.day)"
+    weekStartsOn="1"
+  >
+  </mwl-calendar-month-view>
+
+  <div *ngIf="dayEnabled">
+    <button class="btn btn-success center-block" (click)="backClick()">Terug</button>
+    <div>
+      <mwl-calendar-day-view
+        [viewDate]="selectedDay"
+        [events]="events"
+        >
+      </mwl-calendar-day-view>
+    </div>
+  </div>
+
+</div>
+

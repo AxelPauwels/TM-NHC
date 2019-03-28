@@ -1,0 +1,21 @@
+<div class="input-group">
+    <input class="form-control"
+           uib-datepicker-popup="{{dateFormat}}"
+           datepicker-options="dp.dateOptions"
+           date-disabled="isDateDisabled(date, mode)"
+           is-open="dp.isOpen"
+           init-date="initDate"
+           min-date="minDate"
+           max-date="maxDate"
+           ng-model="date"
+           current-text="Vandaag"
+           clear-text="Wissen"
+           close-text="X"
+           disabled="disabled"
+           datepicker-append-to-body="true"
+    />
+    <div class="input-group-addon nhc-clickable"
+         ng-click="open($event)">
+        <span class="fa fa-calendar fa-fw"></span>
+    </div>
+</div>

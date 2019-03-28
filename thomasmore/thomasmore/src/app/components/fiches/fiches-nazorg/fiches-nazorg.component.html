@@ -1,0 +1,90 @@
+<div id="nazorgFiche">
+  <form [formGroup]="nazorgForm" class="form-horizontal fichesForm"
+        id="ngNazorgForm"
+        #documentEditForm="ngForm">
+          <span *ngIf="hospitalization && animal">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <label for="cage">Kooi</label>
+                <div class="input-group">
+                  <select (change)="kooiChanged($event)" formControlName="cage"
+                          name="cage"
+                          class="form-control"
+                          id="cage"
+                          required>
+                    <option value="0" selected disabled>Selecteer</option>
+                    <option *ngFor="let cage of cages | async" [value]="cage?.id">{{cage?.name}}</option>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </select>
+                  <span class="input-group-btn">
+                    <button type="button" class="form-control kooiInfoButton" (click)="showInfoKooien($event)">
+                      <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-12">
+                <label for="menu_percentage">Menu %</label>
+                <input formControlName="menu_percentage"
+                       name="menu_percentage"
+                       class="form-control"
+                       id="menu_percentage"
+                       [(ngModel)]="hospitalization.menu_percentage"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-12">
+                <label for="hospitalization_comment">Opmerking</label>
+                <select formControlName="hospitalization_comment"
+                        name="hospitalization_comment"
+                        class="form-control"
+                        id="hospitalization_comment"
+                        required >
+                  <option value="0" selected disabled>Selecteer</option>
+                  <option *ngFor="let comment of hospitalizationComments | async" [value]="comment?.id">
+                    {{comment?.name}}
+                  </option>
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-12">
+                  <label for="just_comment">Extra info</label>
+                  <textarea formControlName="just_comment"
+                            name="just_comment"
+                            class="form-control"
+                            placeholder="Extra Info"
+                            id="just_comment">{{just_comment}}
+                  </textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-12">
+                <label for="animal_ideal_weight_general">Streefgewicht</label>
+                <input formControlName="animal_ideal_weight_general"
+                       name="animal_ideal_weight_general"
+                       class="form-control"
+                       id="animal_ideal_weight_general"
+                       placeholder="Streefgewicht"
+                       [(ngModel)]="animal_ideal_weight_general"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-12">
+            <button class="saveButton" (click)="onClick_nazorgOpslaan()">Wijziging opslaan</button>
+              </div>
+            </div>
+
+          </span>
+  </form>
+</div>
+

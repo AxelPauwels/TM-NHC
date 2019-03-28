@@ -1,0 +1,26 @@
+<div class="col-xs-12">
+  <h3 class="form-horizontal-header">
+    <button type="button" class="btn btn-success pull-left" (click)="changeDate(0)"><i class="fa fa-arrow-left"></i>
+    </button>
+    <button type="button" class="btn btn-success pull-left" (click)="changeDate(1)"><i class="fa fa-arrow-right"></i>
+    </button>
+    Taken van {{currentDate | date:'fullDate'}}
+    <button type="button" class="btn btn-success pull-right" (click)="changeDate(-1)">Vandaag</button>
+    <button type="button" class="btn btn-success pull-right" (click)="dp.show()"><input type="text"
+                                                                                        [ngModel]="currentDate"
+                                                                                        (ngModelChange)="changeDate($event)"
+                                                                                        bsDatepicker #dp="bsDatepicker"
+                                                                                        style="visibility: hidden; width:1px; height: 1px;">Selecteer
+      datum
+    </button>
+    <button type="button" class="btn btn-success pull-right" (click)="addTask()">Taak toevoegen</button>
+  </h3>
+
+  <div class="row" id="mainTaskPlannerRow">
+    <ngx-loading [show]="loading" [config]="{backdropBorderRadius: '14px'}"></ngx-loading>
+    <app-task-planner-category-item *ngFor="let category of taskPlannerViewModel?.taskCategories"
+                                    [taskCategory]="category"
+                                    [currentDate]="currentDate"></app-task-planner-category-item>
+  </div>
+
+</div>

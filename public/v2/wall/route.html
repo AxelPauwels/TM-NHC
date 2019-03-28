@@ -1,0 +1,20 @@
+<!--<h4 class="form-horizontal-header" -->
+    <!--ng-bind="route.name"></h4>-->
+<span class="wall-route-header">
+        <span class="nhc-cage-label nhc-cage-header"
+              ng-class="css"
+              ng-style="{color: route.color}"
+              ng-bind="route.name">
+        </span>
+</span>
+
+<div class="nhc-route">
+    <!--onclick="closeAllPopover();">-->
+	<div nhc-cage="cage"
+         ng-style="{color: cage.color}"
+         ng-repeat="cage in cages"
+         ng-init="cage.leftoverLogging = ((leftoverLoggingCages | filter:{'id': cage.id}).length !== 0)"
+         ng-class="css"
+         nhc-show-meal="true"
+         nhc-show-warnings="true"></div>
+</div>

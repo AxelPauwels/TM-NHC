@@ -1,0 +1,17 @@
+<div class="modal-body full-form-width">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label>
+          Naam
+          <input type="text" [(ngModel)]="quarantaineAction.name" class="form-control"/>
+        </label>
+      </div>
+
+      <div class="form-group pull-right">
+        <button type="button" class="btn btn-success" (click)="onClickSave()"><i class="fa fa-save"></i>&nbsp;Opslaan</button>
+        <button type="button" class="btn btn-success" (click)="onClickCancel()"><i class="fa fa-remove"></i>&nbsp;Annuleren</button>
+      </div>
+    </div>
+  </div>
+</div>

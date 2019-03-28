@@ -1,0 +1,36 @@
+<nhc-force-security-reset></nhc-force-security-reset>
+<h3 class="form-horizontal-header">Agenda</h3>
+
+<form role="form" class="form-horizontal nhc-calendar">
+    <div class="form-group form-group-sm">
+        <div class="col-sm-11" ui-calendar="calendarOptions"
+             ng-model="eventSources" calendar="{{calendarOptions.id}}">
+        </div>
+        <div class="col-sm-1 vertical-flex-container"
+             style="height: {{calendarOptions.height}}px;">
+            <h4 class="checkbox-horizontal-header">Kalenders</h4>
+            <div class="checkbox"
+                 ng-repeat="eventSource in availableEventSources">
+                <label for="{{eventSource.id}}"
+                       class="">
+                    <input id="{{eventSource.id}}" type="checkbox"
+                           ng-model="eventSource.show"
+                           switcher="" switch-position="eventSource.show"/>
+                    <div ng-if="eventSource.rendering &&
+                    eventSource.rendering === 'inverse-background'"
+                         class="{{eventSource.className}} fa-fw"
+                         style="color: {{eventSource.textColor}};
+                         background-color: {{eventSource.borderColor}};
+                         border-color: {{eventSource.backgroundColor}};"></div>
+                    <div ng-if="!(eventSource.rendering &&
+                    eventSource.rendering === 'inverse-background')"
+                         class="{{eventSource.className}} fa-fw"
+                         style="color: {{eventSource.textColor}};
+                         background-color: {{eventSource.backgroundColor}};
+                    border-color: {{eventSource.borderColor}};"></div>
+                    {{eventSource.title}}
+                </label>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,70 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>Kooi</th>
+        <th ng-repeat="label in dayLabels track by $index">
+            <span ng-bind="label[0]"></span>
+            <sup ng-bind="label[1]"></sup>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="item in leftovers | orderBy : ['cageRoute', 'cageName'] track by $index">
+        <td>
+            <div ng-style="{color: item.color}"
+                 class="nhc-cage-label nhc-cage-header"
+                 ng-bind="item.cageName">
+            </div>
+        </td>
+
+        <td ng-repeat="label in dayLabels track by $index"
+            ng-if="$index != daysAgoToShow">
+            <div class="flex-container"
+                 ng-if="item.relative_day_leftover[daysAgoToShow - $index]">
+                        <span class="col-sm-6 col-container centered highlighted"
+                              ng-style="getWarningStyle(item.relative_day_leftover[daysAgoToShow - $index].percent)"
+                              ng-bind="item.relative_day_leftover[daysAgoToShow - $index].quantity">
+                        </span>
+                <sup ng-if="showPercentage && item.relative_day_leftover[daysAgoToShow - $index].percent"
+                     class="col-sm-6 col-container badge"
+                     ng-bind="item.relative_day_leftover[daysAgoToShow - $index].percent + '%'"></sup>
+                <sub class="col-sm-10 col-container badge muted"
+                     ng-if="showMenuQuantityAnimalCount && item.relative_day_leftover[daysAgoToShow - $index].menu_quantity">
+                    [{{item.relative_day_leftover[daysAgoToShow -
+                    $index].menu_quantity}} /
+                    {{item.relative_day_leftover[daysAgoToShow -
+                    $index].animal_count}}]
+                </sub>
+            </div>
+            <div ng-if="!item.relative_day_leftover[daysAgoToShow - $index]">
+                <span class="col-sm-4 col-container centered placeholder">-</span>
+            </div>
+        </td>
+
+        <td colspan="2">
+            <div class="flex-container">
+                        <span class="col-sm-5 col-container">
+                        <input type="number" min="0"
+                               class="form-control highlighted"
+                               ng-style="getWarningStyle(item.relative_day_leftover[0].percent)"
+                               ng-model="item.relative_day_leftover['0'].quantity"
+                               ng-change="save(item)"
+                               ng-model-options="{updateOn: 'default', debounce:{'default': automaticUpdateDebounceTime}}"
+                               placeholder="0" ng-virtual-keyboard/>
+                        </span>
+                <sup class="col-sm-3 col-container badge"
+                     ng-class="(showPercentage && item.relative_day_leftover[0].percent) ? '' : 'badge-spacer'"
+                     ng-bind="showPercentage && item.relative_day_leftover[0].percent ? item.relative_day_leftover[0].percent + '%' : '&nbsp;'"></sup>
+                <sub ng-if="showMenuQuantityAnimalCount && item.relative_day_leftover[0].menu_quantity"
+                     class="col-sm-5 col-container badge muted">
+                    [{{item.relative_day_leftover['0'].menu_quantity}} /
+                    {{item.relative_day_leftover['0'].animal_count}}]
+                </sub>
+            </div>
+        </td>
+
+    </tr>
+    </tbody>
+</table>

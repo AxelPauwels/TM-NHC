@@ -1,0 +1,19 @@
+table {
+  border-top: none !important;
+}
+
+button.saveButton {
+  width: 100%;
+  border-radius: 4px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: -1px !important;
+  color: whitesmoke;
+  font-size: 14px;
+  background-color: #1E5162 !important;
+  border-color: var(--off-black);
+}
+
+div.modal-footer{
+  border-top:none !important;
+}

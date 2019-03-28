@@ -1,0 +1,24 @@
+<div class="modal-header">
+	<h3>Splitsen</h3>
+</div>
+<div class="modal-body">
+	<form role="form" class="form-horizontal">
+        <ng-include src="'/v2/fiche/modal_form_common_part.html'"></ng-include>
+		<div class="form-group form-group-sm">
+			<label for="entrance" class="col-sm-3 control-label">Aankomst</label>
+			<div class="col-sm-4">
+				<nhc-date-picker id="entrance" nhc-date="guest.entrance" nhc-disabled="disabled"></nhc-date-picker>
+			</div>
+		</div>
+		<div class="form-group form-group-sm">
+			<label for="split_count" class="col-sm-3 control-label">Aantal afsplitsen</label>
+			<div class="col-sm-2">
+				<input id="split_count" type="number" min="1" max="{{guest.quantity}}" class="form-control" ng-model="split_count" />
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn nhc-btn" ng-click="ok()">Bevestigen</button>
+	<button class="btn nhc-btn" ng-click="cancel()">Annuleren</button>
+</div>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!-- views/v2.ejs -->
+<html lang="nl">
+<head>
+    <title>Natuurhulpcentrum Wall</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Wildlife Rescue & Shelter Application">
+    <meta name="author" content="Ben Thaens, Arie Tegenbosch">
+    <!-- Scripts -->
+    <!--<script src="javascripts/stacktrace.min.js"></script>-->
+    <script src="javascripts/error-stack-parser.min.js"></script>
+    <script src="javascripts/jquery-2.1.3.min.js"></script>
+    <script src="javascripts/nhc-v2-dynamic-routing.js"></script>
+    <script src="javascripts/angular.min.js"></script>
+    <script src="javascripts/angular-animate.min.js"></script>
+    <script src="javascripts/angular-cookies.min.js"></script>
+    <script src="javascripts/angular-route.min.js"></script>
+    <script src="javascripts/angular-resource.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <!--<script src="javascripts/ui-bootstrap-tpls.min.js"></script>-->
+    <script src="javascripts/ui-bootstrap-tpls-0.14.3.js"></script>
+
+    <!-- TODO Upgrade to ui-bootstrap-tpls-2.5.0.min.js -->
+    <!--<script src="javascripts/ui-bootstrap-tpls-2.5.0.min.js"></script>-->
+    <script src="javascripts/angular-spinners.min.js"></script>
+    <script src="javascripts/angular-clock.min.js"></script>
+    <script src="javascripts/moment.min.js"></script>
+    <script src="javascripts/fullcalendar.min.js"></script>
+    <script src="javascripts/calendar.js"></script>
+    <script src="javascripts/gcal.js"></script>
+
+    <script src="javascripts/angular-useragent-parser.min.js"></script>
+    <script src="javascripts/angular-virtual-keyboard.min.js"></script>
+    <!--<script src="javascripts/angular-virtual-keyboard.js"></script>-->
+
+    <script src="javascripts/screenfull.min.js"></script>
+    <script src="javascripts/angular-scrollable-table.min.js"></script>
+
+    <script src="javascripts/abn_tree_directive.js"></script>
+
+    <script src="javascripts/spectrum.js"></script>
+    <script src="javascripts/angular-spectrum-colorpicker.min.js"></script>
+
+    <script src="javascripts/angular-draggable-toggle.min.js"></script>
+
+    <!--<script src="javascripts/ng-right-click-module.js"></script>-->
+    <!--<script src="javascripts/ng-right-click.js"></script>-->
+
+    <script src="javascripts/nhc-wall-2.js"></script>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.css"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="stylesheets/fonts.css"/>
+    <link rel="stylesheet" href="elusive-icons-2.0.0/css/elusive-icons.min.css"/>
+    <link rel="stylesheet" href="ionicons-2.0.1/css/ionicons.min.css"/>
+
+    <link rel="stylesheet" href="stylesheets/angular-clock.css">
+    <link rel="stylesheet" href="stylesheets/fullcalendar.min.css">
+
+    <link rel="stylesheet" href="stylesheets/angular-virtual-keyboard.css">
+    <link rel="stylesheet" href="stylesheets/scrollable-table.css">
+
+    <link rel="stylesheet" href="stylesheets/abn_tree.css">
+
+    <link rel="stylesheet" href="stylesheets/spectrum.css">
+
+    <link rel="stylesheet" href="stylesheets/angular-draggable-toggle.css">
+
+    <link rel="stylesheet" href="stylesheets/nhc_basic.css"/>
+
+    <link rel="stylesheet" href="stylesheets/thomasmore.css"/>
+</head>
+
+<body ng-app="nhcWall"
+      ng-controller="MainController"
+      right-click>
+
+<script>
+    $( document ).ready(function() {
+        var opnameBtnTablet = $( 'div' ).find('img[src$="/images/rub18.png"]');
+        opnameBtnTablet.parent().addClass('hideOpnameBtnTablet');
+
+        var opnameBtnPC = $( 'div' ).find('img[src$="/images/rub18b.png"]');
+        opnameBtnPC.parent().addClass('hideOpnameBtnPC');
+    });
+</script>
+<nhc-link-action nhc-url="/"
+                 nhc-image="/images/rub14.png"
+                 nhc-title="Voederbord"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/walls/quarantaine"
+                 nhc-image="/images/rub3.png"
+                 nhc-title="Quarantaine"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/leftover"
+                 nhc-image="/images/rub15.png"
+                 nhc-title="Voedselresten"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/walls/preparation"
+                 nhc-image="/images/rub2.png"
+                 nhc-title="Klaarmaken"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/walls/medication"
+                 nhc-image="/images/rub4.png"
+                 nhc-title="Medicatie"
+                 nhc-role="rlVolunteer"
+                 nhc-active="false"></nhc-link-action>
+<nhc-link-action nhc-url="/fiches/adoption"
+                 nhc-image="/images/rub13.png"
+                 nhc-title="Adoptie"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<!--<editor-fold desc="Thomas More Links">-->
+<nhc-link-action nhc-url="/opname"
+                 nhc-image="/images/rub18.png"
+                 nhc-title="Opname"
+                 nhc-role="rlUser"></nhc-link-action>
+<nhc-link-action nhc-url="/opnameTablet"
+                 nhc-image="/images/rub18b.png"
+                 nhc-title="Opname"
+                 nhc-role="rlUser"></nhc-link-action>
+<nhc-link-action nhc-url="/egelswegen"
+                 nhc-image="/images/rub17.png"
+                 nhc-title="Egels Wegen"
+                 nhc-role="rlUser"></nhc-link-action>
+<nhc-link-action nhc-url="/fiches"
+                 nhc-image="/images/rub5.png"
+                 nhc-title="Fiches"
+                 nhc-role="rlUser"></nhc-link-action>
+<nhc-link-action nhc-url="/executor/tasks"
+                 nhc-image="/images/rub5.png"
+                 nhc-title="Wie doet wat?"
+                 nhc-role="rlVolunteer"
+                 nhc-active="false"></nhc-link-action>
+<!--</editor-fold>-->
+<nhc-link-action nhc-url="/fiches/recover_list"
+                 nhc-image="/images/rub5.png"
+                 nhc-title="Fiches (Achter)"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/fiches/ic_list"
+                 nhc-image="/images/rub5.png"
+                 nhc-title="Fiches (IC)"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/fiches/end_list"
+                 nhc-image="/images/rub5.png"
+                 nhc-title="Fiches (Archief)"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<!--<nhc-link-action nhc-url="/fiches/archived_list"-->
+<!--nhc-image="/images/rub5.png"-->
+<!--nhc-title="Fiches (Archief)"-->
+<!--nhc-role="rlVolunteer"></nhc-link-action>-->
+<nhc-link-action nhc-url="/fiches/overview_report"
+                 nhc-image="/images/rub5.png"
+                 nhc-title="Fiche-overzicht"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/taken"
+                 nhc-image="/images/rub8.png"
+                 nhc-title="Taken"
+                 nhc-role="rlVolunteer"
+                 ></nhc-link-action>
+<nhc-link-action nhc-url="/kalender"
+                 nhc-image="/images/rub23.png"
+                 nhc-title="Vrijwilligers Kalender"
+                 nhc-role="rlVolunteer"
+></nhc-link-action>
+<nhc-link-action nhc-url="/mousebreeding"
+                 nhc-image="/images/rub16.png"
+                 nhc-title="Muizen kwekerij"
+                 nhc-role="rlVolunteer"
+                 nhc-active="false"></nhc-link-action>
+<nhc-link-action nhc-url="/stockmanagement"
+                 nhc-image="/images/rub6 2.png"
+                 nhc-title="Voorraadbeheer"
+                 nhc-role="rlVolunteer"
+                 nhc-active="false"></nhc-link-action>
+<nhc-link-action nhc-url="/directions"
+                 nhc-image="/images/rub7 2.png"
+                 nhc-title="Wegwijs"
+                 nhc-role="rlVolunteer"></nhc-link-action>
+<nhc-link-action nhc-url="/config/main"
+                 nhc-image="/images/rub11.png"
+                 nhc-title="Systeembeheer"
+                 nhc-role="rlAdmin"
+                 nhc-sign-in="true"></nhc-link-action>
+<nhc-link-action nhc-url="/statistieken"
+                 nhc-image="/images/rub24.png"
+                 nhc-title="Statistieken"
+                 nhc-role="rlAdmin"
+                 nhc-sign-in="true"></nhc-link-action>
+
+<div class="nhc-global-container">
+
+    <div class="nhc-container container-fluid">
+        <ng-view></ng-view>
+    </div>
+
+    <div class="nhc-actionbar-spacer"></div>
+
+    <div class="tool-bar">
+        <div class="floating-toggle" ng-controller="FullscreenController">
+            <div ng-if="fullscreenEnabled"
+                 style="width: 64px"
+                 class="tool-bar-item">
+                <div draggable-toggle="{click: false, height: 32, handleWidth: 32, on: true, text: {on: '', off: ''}}"
+                     class="round"
+                     bounce-back="false"
+                     click-off="toggleFullscreen()"
+                     click-off-bounce-back="true"
+                     on-class="fa fa-fw fa-angle-double-left"
+                     off-class="fa fa-fw fa-dot-circle-o nhc-clickable"
+                     handle-class="fa fa-fw fa-arrows-alt">
+                </div>
+            </div>
+        </div>
+        <!-- TODO: Right-side toolbar ?!?-->
+        <!--<div>-->
+            <!--<div class="tool-bar-item nhc-clickable"-->
+                 <!--ng-click="">-->
+                <!--<span class="fa fa-fw fa-bell"-->
+                      <!--aria-hidden="true">-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div ng-controller="FullscreenController">-->
+            <!--<div ng-if="fullscreenEnabled"-->
+                 <!--class="tool-bar-item nhc-clickable"-->
+                 <!--ng-click="toggleFullscreen()">-->
+                <!--<span class="fa fa-fw fa-arrows-alt"-->
+                      <!--aria-hidden="true">-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div ng-controller="VirtualKeyboardController">-->
+            <!--<div class="tool-bar-item nhc-clickable"-->
+                 <!--ng-click="toggleKeyboardPosition()">-->
+                <!--<span class="fa fa-fw fa-keyboard-o"-->
+                      <!--aria-hidden="true">-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+
+    <div class="nhc-bar text-shadow-dark"
+         ng-controller="NhcActionBarController"
+         ng-disabled="locked">
+        <div ng-repeat="action in actions | filter:{active:true}"
+             class="nhc-bar-item nhc-clickable" ng-click="execute(action)">
+            <img ng-if="action.imageUrl" ng-src="{{action.imageUrl}}"
+                 class="nhc-action-image img-responsive img-rounded"/>
+            <div class="nhc-action-title">
+                <span ng-if="action.icon" class="fa fa-fw"
+                      ng-class="action.icon"></span>
+                <span ng-if="action.title" ng-bind="action.title"></span>
+            </div>
+        </div>
+        <div class="nhc-bar-item" ng-controller="SpinnerController">
+            <spinner name="nhcActionBarSpinner" class="nhc-clickable"
+                     ng-click="resetSpinner($event)">
+                <div class="fa fa-spin fa-spinner" aria-hidden="true"></div>
+                <div>Even geduld <br>a.u.b...</div>
+                <div class="bouncing-bar-spinner"></div>
+            </spinner>
+        </div>
+        <div class="nhc-bar-item nhc-bar-logo">
+            <img class="nhc-action-image"
+                 src="/images/logo_natuurhulpcentrum_white.svg"/>
+            <div class="nhc-action-title">
+                <span>Natuurhulpcentrum</span>
+            </div>
+            <div class="floating-toggle">
+                <div style="width: 64px">
+                    <div draggable-toggle="{click: false, height: 32, handleWidth: 32, on: true, text: {on: '', off: ''}}"
+                         do-toggle="toggleActionBarLock()"
+                         bounce-back="true"
+                         class="round"
+                         on-class="fa fa-fw fa-angle-double-left"
+                         handle-class="fa fa-fw fa-lock">
+                    </div>
+                </div>
+            </div>
+            <div class="screensize"
+                 ng-bind="windowInnerWidth + ' x ' + windowInnerHeight"></div>
+        </div>
+        <div class="nhc-bar-item nhc-clickable nhc-bar-clock"
+             ng-controller="ClockController" ng-click="executeAction()">
+            <ds-widget-clock show-analog theme="nhc-light"
+                             class="nhc-action-image img-responsive img-rounded"></ds-widget-clock>
+            <ds-widget-clock show-digital
+                             digital-format="clock_format"
+                             class="nhc-action-title"></ds-widget-clock>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

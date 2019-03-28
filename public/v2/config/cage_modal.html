@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h3 class="form-horizontal-header">Kooi&nbsp;<span
+            ng-if="!appform.$pristine"
+            class="fa fa-pencil"></span></h3>
+</div>
+
+<div class="modal-body">
+    <form name="appform"
+          role="form"
+          class="form-horizontal">
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Systeem ID</label>
+
+            <div class="col-sm-2">
+                <div class="form-control-static"
+                     ng-bind="cage.id">
+                </div>
+            </div>
+
+            <div class="col-sm-3 control-label">
+                <span ng-repeat="route in routes | filter:{'id': cage.route}"
+                      ng-bind="cage.name"
+                      ng-style="{color: route.color}"
+                      class="nhc-cage-label nhc-cage-header">
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Naam</label>
+            <div class="col-sm-5">
+                <input class="form-control"
+                       ng-model="cage.name"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Route</label>
+            <div class="col-sm-5">
+                <select class="form-control"
+                        ng-model="cage.route"
+                        ng-options="route.id as route.name for route in routes | orderBy : 'name'">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Bord-positie</label>
+            <div class="col-sm-3">
+                <input class="form-control"
+                       type="number" min="0"
+                       ng-model="cage.board_position"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Licht aan</label>
+            <div class="col-sm-1">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               ng-model="cage.lights_on"
+                               ng-true-value="1"
+                               ng-false-value="0"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Poetsen</label>
+            <div class="col-sm-1">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               ng-model="cage.to_clean"
+                               ng-true-value="1"
+                               ng-false-value="0"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-if="!appform.$pristine"
+            class="btn nhc-btn" ng-click="ok()">Bewaren
+    </button>
+    <button class="btn nhc-btn" ng-click="cancel()">Annuleren</button>
+</div>

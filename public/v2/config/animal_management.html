@@ -1,0 +1,94 @@
+<nhc-secured-page nhc-role="'rlAdmin'"></nhc-secured-page>
+<ng-include src="'/v2/config/config_links.html'"></ng-include>
+<!-- TODO Improve handling of group-name (verzamelnaam) i.e. a selectable category i.s.o. free form text-->
+<h3 class="form-horizontal-header">Diersoorten</h3>
+
+<form role="form" class="form-horizontal">
+
+    <div class="form-group form-group-sm">
+        <div class="col-sm-offset-4 col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-search"></span>
+                </div>
+                <input id="searchField"
+                       class="form-control"
+                       type="text"
+                       ng-model="searchValue"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="control-label col-sm-offset-3 col-sm-1">Totaal:
+            {{animals.length || 0}}</label>
+    </div>
+
+    <scrollable-table watch="appData" style="height: 510px">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Systeem ID</th>
+                <th>Soortnaam (Wetenschappelijk)</th>
+                <th>Verzamelnaam</th>
+                <th>Streefgewicht</th>
+                <!--<th>Afbeelding</th>-->
+                <th>Adoptie</th>
+                <th>17u</th>
+                <th>Klaarmaken</th>
+                <th>
+                    <div class="nhc-clickable"
+                         ng-click="create($event)">
+                        <label class="command-icon fa fa-plus-square fa-fw"
+                               aria-hidden="true"></label>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="nhc-clickable"
+                ng-click="update($event, item)"
+                ng-repeat="item in animals | filter : searchValue | orderBy : 'name' track by $index">
+                <td ng-bind="item.id"></td>
+                <td>
+                    <span ng-bind="item.name"></span>
+                    <span ng-if="item.scientific_name">({{item.scientific_name}})</span>
+                </td>
+                <td ng-bind="item.group_name"></td>
+                <td>
+                    <div class="col-sm-6"
+                         ng-if="item.ideal_weight_general_male">
+                        <span ng-if="!item.ideal_weight_female"
+                              class="fa fa-venus-mars"></span>
+                        <span ng-if="item.ideal_weight_female"
+                              class="fa fa-mars"></span>
+                        <span ng-bind="item.ideal_weight_general_male"></span>
+                    </div>
+                    <div class="col-sm-6" ng-if="item.ideal_weight_female">
+                        <span class="fa fa-venus"></span>
+                        <span ng-bind="item.ideal_weight_female"></span>
+                    </div>
+                </td>
+                <!--<td ng-bind="item.image"></td>-->
+                <td>
+                    <span ng-if="item.default_for_adoption === 1"
+                          class="fa fa-check fa-fw"></span>
+                </td>
+                <td>
+                    <span ng-if="item.eats_at_night === 1"
+                          class="fa fa-check fa-fw"></span>
+                </td>
+                <td>
+                    <span ng-repeat="prepareCategory in prepareCategories | filter:{'id': item.food_prepare_category}"
+                          ng-bind="prepareCategory.name"></span>
+                </td>
+                <td class="nhc-clickable">
+                    <span ng-click="delete($event, item)"
+                          class="command-icon fa fa-trash fa-fw">
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </scrollable-table>
+</form>

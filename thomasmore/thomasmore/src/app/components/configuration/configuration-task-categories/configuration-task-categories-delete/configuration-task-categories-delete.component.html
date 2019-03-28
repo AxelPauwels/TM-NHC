@@ -1,0 +1,6 @@
+<div class="modal-body" *ngIf="taskCategory != undefined">
+  <p>Ben je zeker dat je de categorie '{{taskCategory.name}}' wil verwijderen?</p>
+  <p><strong>Alle taken en herhalende taken die tot deze categorie behoren worden verwijderd!</strong></p>
+  <button type="button" class="btn btn-success" (click)="onConfirm()" ><i class="fa fa-trash"></i>&nbsp;Ja</button>
+  <button type="button" class="btn btn-success" (click)="onCancel()" ><i class="fa fa-remove"></i>&nbsp;Nee</button>
+</div>

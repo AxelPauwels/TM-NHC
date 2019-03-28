@@ -1,0 +1,96 @@
+<nhc-force-security-reset></nhc-force-security-reset>
+<h3 class="form-horizontal-header">Ter adoptie</h3>
+
+<form role="form" class="form-horizontal">
+    <div class="form-group form-group-sm">
+
+        <!--<label class="control-label col-sm-4" for="searchField">Zoeken</label>-->
+        <!--<div class="col-sm-4">-->
+        <!--<input id="searchField" class="form-control"-->
+        <!--ng-model="searchValue" ng-virtual-keyboard/>-->
+        <!--</div>-->
+        <div class="col-sm-offset-4 col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-search"></span>
+                </div>
+                <input id="searchField"
+                       class="form-control"
+                       type="text"
+                       ng-model="searchValue"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="control-label col-sm-offset-3 col-sm-1">Totaal:
+            {{guests.length || 0}}</label>
+    </div>
+
+    <scrollable-table watch="appData" style="height: 550px">
+        <table ng-show="guests && guests.length > 0"
+               class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Kooi</th>
+                <th>Aankomst</th>
+                <th>Diersoort</th>
+                <!--<th>Aantal</th>-->
+                <th>Aantal per geslacht</th>
+                <!--<th><span class="fa fa-venus-mars bold"></span></th>-->
+                <!--<th><span class="fa fa-mars bold"></span></th>-->
+                <!--<th><span class="fa fa-venus bold"></span></th>-->
+                <th>Beschikbaar vanaf</th>
+                <th>Gereserveerd</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="guest in guests | filter : searchValue | orderBy : ['color', 'cage_name'] track by $index"
+                class="nhc-clickable"
+                ng-click="fiche(guest)">
+                <!--<td ng-bind="guest.cage_name"></td>-->
+                <td>
+                    <div ng-style="{color: guest.color}"
+                         class="nhc-cage-label nhc-cage-header"
+                         ng-bind="guest.cage_name">
+                    </div>
+                </td>
+                <td ng-bind="guest.entrance | date : dateFormat"></td>
+                <td ng-bind="guest.animal_name"></td>
+                <!--<td ng-bind="guest.quantity"></td>-->
+                <td>
+                    <div class="col-sm-4 col-container">
+                        <div ng-if="guest.quantity - guest.male_quantity - guest.female_quantity">
+                            <span class="fa fa-venus-mars bold">&nbsp;</span>
+                            <span ng-bind="guest.quantity - guest.male_quantity - guest.female_quantity"></span>
+                        </div>
+                    </div>
+                    <!--</td>-->
+                    <!--<td>-->
+                    <div class="col-sm-4 col-container">
+                        <div ng-if="guest.male_quantity">
+                            <span class="fa fa-mars bold">&nbsp;</span>
+                            <span ng-bind="guest.male_quantity"></span>
+                        </div>
+                    </div>
+                    <!--</td>-->
+                    <!--<td>-->
+                    <div class="col-sm-4 col-container">
+                        <div ng-if="guest.female_quantity">
+                            <span class="fa fa-venus bold">&nbsp;</span>
+                            <span ng-bind="guest.female_quantity"></span>
+                        </div>
+                    </div>
+                </td>
+                <td ng-bind="guest.adoption_from | date : dateFormat"></td>
+                <td>
+                    <span ng-if="guest.reserved === 1">Ja
+                        <span ng-if="guest.reserved_for && guest.reserved_for !== ''">
+                            ({{guest.reserved_for}})</span>
+                    </span>
+                    <span ng-if="guest.reserved !== 1">Nee</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </scrollable-table>
+</form>

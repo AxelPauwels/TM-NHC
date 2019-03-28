@@ -1,0 +1,265 @@
+:root {
+  --main-bg-color-r: 88;
+  --main-bg-color-g: 160;
+  --main-bg-color-b: 160;
+  --main-bg-color: rgb(var(--main-bg-color-r), var(--main-bg-color-g), var(--main-bg-color-b));
+  --off-white-r: 255;
+  --off-white-g: 255;
+  --off-white-b: 231;
+  --off-white: rgb(var(--off-white-r), var(--off-white-g), var(--off-white-b));
+  --off-black-r: 64;
+  --off-black-g: 32;
+  --off-black-b: 32;
+  --off-black: rgb(var(--off-black-r), var(--off-black-g), var(--off-black-b));
+  --button-bg-color-r: 181;
+  --button-bg-color-g: 116;
+  --button-bg-color-b: 35;
+  --button-bg-color: rgb(var(--button-bg-color-r), var(--button-bg-color-g), var(--button-bg-color-b));
+  --input-bg-color-r: 181;
+  --input-bg-color-g: 116;
+  --input-bg-color-b: 35;
+  --input-bg-color: rgb(var(--input-bg-color-r), var(--input-bg-color-g), var(--input-bg-color-b));
+  --padding: 2px;
+  --border-width: 1px;
+  --actionbar-height: 135px;
+  --cage-remark-color: #c0392b;
+  --text-shadow-light: .1em .1em .2em #ffffff;
+  --text-shadow-dark: .1em .1em .2em #000000;
+}
+
+/*OPNAMETABLET ----------------------------------------------------*/
+/*datePicker*/
+/*datepicker-pop-up-size*/
+div.myDatePickerTablet div.selector.selectorarrow.selectorarrowleft {
+  width: 100.5% !important;
+}
+
+/*datepicker-layout input*/
+div.myDatePickerTablet .mydp, .mydp .headertodaybtn {
+  border: 1px solid var(--off-black) !important;
+  height: 42px !important;
+}
+
+div.myDatePickerTablet .mydp input {
+  height: 40px !important;
+  font-family: 'Laila' !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+}
+
+div.myDatePickerTablet .mydp .selection {
+  color: var(--off-white) !important;
+  background-color: var(--input-bg-color) !important;
+}
+
+div.myDatePickerTablet .btnclear,
+div.myDatePickerTablet .mydp .btnpicker {
+  background: var(--input-bg-color) !important;
+}
+
+/*datepicker-icons*/
+div.myDatePickerTablet div.selbtngroup {
+  height: 40px !important;
+}
+
+div.myDatePickerTablet .mydp .mydpicon {
+  font-size: 30px !important;
+}
+
+div.myDatePickerTablet button.btnclear,
+div.myDatePickerTablet button.btnpicker {
+  width: 50px !important;
+}
+
+/*custom checkboxen*/
+div.opnameTabletContent div.customCheckbox label {
+  font-weight: normal !important;
+  height: 50px !important;
+  padding-top: 14px !important;
+}
+
+div.opnameTabletContent div.customCheckbox input[type='checkbox'] {
+  padding-top: 1px !important;
+  vertical-align: top;
+  margin: 8px;
+  transform: scale(1.8);
+}
+
+/*FICHES ----------------------------------------------------------*/
+/*datePicker*/
+div.myDatePicker {
+  margin-bottom: -4px !important;
+}
+
+/*datepicker-pop-up-size*/
+div.myDatePicker div.selector.selectorarrow.selectorarrowleft {
+  width: 101% !important;
+}
+
+/*datepicker-layout input*/
+div.myDatePicker .mydp, .mydp .headertodaybtn {
+  border: 1px solid var(--off-black) !important;
+  height: 32px !important;
+}
+
+div.myDatePicker .mydp input {
+  height: 30px !important;
+  font-family: 'Laila' !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+div.myDatePicker .mydp .selection {
+  color: var(--off-white) !important;
+  background-color: var(--input-bg-color) !important;
+}
+
+div.myDatePicker .btnclear,
+div.myDatePicker .mydp .btnpicker {
+  background: var(--input-bg-color) !important;
+}
+
+/*datepicker-icons*/
+div.myDatePicker div.selbtngroup {
+  height: 30px !important;
+}
+
+div.myDatePicker .mydp .mydpicon {
+  font-size: 14px !important;
+}
+
+div.myDatePicker button.btnclear,
+div.myDatePicker button.btnpicker {
+  width: 30px !important;
+}
+
+/*datepickerStreefgewicht-layout input*/
+div.mydp {
+  height: 30px !important;
+  margin-top: 3px !important;
+}
+
+.myDatePickerStreefgewicht .mydp, .mydp .headertodaybtn {
+  border: 1px solid var(--off-black) !important;
+  height: 30px !important;
+  /*padding-top: 2px;*/
+}
+
+.myDatePickerStreefgewicht .mydp input {
+  height: 28px !important;
+  font-family: 'Laila' !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+.myDatePickerStreefgewicht .mydp .selection {
+  color: var(--off-white) !important;
+  background-color: var(--input-bg-color) !important;
+}
+
+.myDatePickerStreefgewicht .btnclear,
+.myDatePickerStreefgewicht .mydp .btnpicker {
+  background: var(--input-bg-color) !important;
+}
+
+/*datepickerStreefgewicht-icons*/
+.myDatePickerStreefgewicht div.selbtngroup {
+  padding-top: 2px;
+  height: 28px !important;
+}
+
+.myDatePickerStreefgewicht .mydp .mydpicon {
+  font-size: 14px !important;
+}
+
+.myDatePickerStreefgewicht button.btnclear,
+.myDatePickerStreefgewicht button.btnpicker {
+  width: 30px !important;
+}
+
+/*datepickerQuarantaine-layout input*/
+div.mydp {
+  height: 30px !important;
+}
+
+.myDatePickerQuarantaine .mydp, .mydp .headertodaybtn {
+  border: 1px solid var(--off-black) !important;
+  height: 30px !important;
+  /*padding-top: 2px;*/
+}
+
+.myDatePickerQuarantaine .mydp input {
+  height: 28px !important;
+  font-family: 'Laila' !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+.myDatePickerQuarantaine .mydp .selection {
+  color: var(--off-white) !important;
+  background-color: var(--input-bg-color) !important;
+}
+
+.myDatePickerQuarantaine .btnclear,
+.myDatePickerQuarantaine .mydp .btnpicker {
+  background: var(--input-bg-color) !important;
+}
+
+/*datepickerQuarantaine-icons*/
+.myDatePickerQuarantaine div.selbtngroup {
+  padding-top: 2px;
+  height: 28px !important;
+}
+
+.myDatePickerQuarantaine .mydp .mydpicon {
+  font-size: 14px !important;
+}
+
+.myDatePickerQuarantaine button.btnclear,
+.myDatePickerQuarantaine button.btnpicker {
+  width: 30px !important;
+}
+
+/* Taskplanner */
+div.ps > .ps__rail-y, div.ps > .ps__rail-x {
+  background-color: transparent !important;
+}
+
+.full-form-width .form-group > label {
+  width: 100%
+}
+
+#main-content-div {
+  overflow-y: auto;
+  height: calc((100vh - var(--actionbar-height)));
+  max-height: calc((100vh - var(--actionbar-height)));
+}
+
+/* DatePicker */
+.selectiongroup{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.btnpickerenabled{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.btnclearenabled{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.mydp{
+  border: 1px solid black !important;
+  background-color: #b57423 !important;
+}
+
+.mydp .selection {
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+
+

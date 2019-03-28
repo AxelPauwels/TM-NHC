@@ -1,0 +1,60 @@
+:root {
+  --off-white-r: 255;
+  --off-white-g: 255;
+  --off-white-b: 231;
+  --off-white: rgb(var(--off-white-r), var(--off-white-g), var(--off-white-b));
+  --off-blue: rgb(30, 80, 100);
+}
+
+div.opnameTabletContainer {
+  position: relative;
+  height: 90vh;
+  width: 100vw;
+}
+
+div.opnameTabletContent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding-top: 20px;
+}
+
+div.opnameTabletFooter {
+  position: absolute;
+  bottom: 135px;
+  left: 0;
+  width: 100%;
+}
+
+/*volgnummer*/
+div.idLabel {
+  text-align: center;
+}
+
+div.idLabel > p {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+/*image*/
+img {
+  height: 55vh;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+}
+
+/*submitButton*/
+button.opnameTabletSubmitButton {
+  /*background-color: var(--off-blue) !important;*/
+  background-color: #1E5162;
+  height: 50px;
+  border-radius: 15px;
+  font-size: 30px;
+  color: var(--off-white);
+}

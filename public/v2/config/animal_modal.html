@@ -1,0 +1,190 @@
+<div class="modal-header">
+    <h3 class="form-horizontal-header">Diersoort&nbsp;<span
+            ng-if="!appform.$pristine"
+            class="fa fa-pencil"></span></h3>
+</div>
+
+<div class="modal-body">
+    <form name="appform"
+          role="form"
+          class="form-horizontal">
+        <div class="form-group form-group-sm">
+            <label for="id"
+                   class="col-sm-3 control-label">Systeem
+                ID</label>
+            <div class="col-sm-2">
+                <div id="id"
+                     class="form-control-static"
+                     ng-bind="animal.id">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-3 control-label">Afbeelding</label>
+            <div class="col-sm-6">
+                <input id="image"
+                       class="form-control"
+                       ng-model="animal.image"
+                       ng-virtual-keyboard/>
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-2">
+                <div class="col-vertical-span img-rounded img-thumbnail nhc-clickable"
+                     ng-click="showImage($event)">
+                    <img class="img-responsive img-rounded"
+                         ng-src={{animal.image}}>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label for="name"
+                   class="col-sm-3 control-label">Soortnaam</label>
+            <div class="col-sm-6">
+                <input id="name"
+                       class="form-control"
+                       ng-model="animal.name"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label for="scientific_name"
+                   class="col-sm-3 control-label">Wetenschappelijke naam</label>
+            <div class="col-sm-6">
+                <input id="scientific_name"
+                       class="form-control"
+                       ng-model="animal.scientific_name"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label for="group_name"
+                   class="col-sm-3 control-label">Verzamelnaam</label>
+            <div class="col-sm-6">
+                <input id="group_name"
+                       class="form-control"
+                       ng-model="animal.group_name"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label for="ideal_weight"
+                   class="col-sm-3 control-label">Streefgewicht</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span ng-if="!animal.ideal_weight_female"
+                              class="control-label fa fa-venus-mars"></span>
+                        <span ng-if="animal.ideal_weight_female"
+                              class="control-label fa fa-mars"></span>
+                    </div>
+                    <input id="ideal_weight"
+                           class="form-control"
+                           type="number" min="0"
+                           ng-model="animal.ideal_weight_general_male"
+                           ng-virtual-keyboard/>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="control-label fa fa-venus"></span>
+                    </div>
+                    <input id="ideal_weight_female"
+                           class="form-control"
+                           type="number" min="0"
+                           ng-model="animal.ideal_weight_female"
+                           ng-virtual-keyboard/>
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <label class="control-label">gram</label>
+            </div>
+        </div>
+        <!-- TODO: CITES Appendix / Annex with logo and official badges (+ empty forms??? on species and animal) (+ form status of animal ?? requested, available)
+                Appendix en bijlage
+
+                Er is een internationale en een Europese CITES-indeling.
+
+                Internationaal: appendix I, II en III
+                Europees: bijlage A, B, C en D
+
+                De internationale appendix bepaalt het beschermingsniveau van een soort.
+                In appendix I zijn de strengst beschermde soorten opgenomen.
+                De appendix 1 kan met bijlage A worden vergeleken. De Europese bijlagen zijn voor Nederland altijd leidend. De bijlage is nooit minder streng dan de appendix, maar kan wel strenger zijn.
+
+                CITES-soorten zijn in de Europese Unie ingedeeld in 4 bijlagen:
+
+                bijlage/annex A: met uitsterven bedreigde soorten
+                bijlage/annex B: soorten die zouden uitsterven als de handel niet beperkt zou worden
+                bijlage/annex C: soorten die in bepaalde landen worden beschermd
+                bijlage/annex D: deze soorten zijn niet door CITES beschermd, maar de handel wordt wel geregistreerd. Het gaat om soorten waarvan Europa vindt dat ze mogelijk bedreigd raken.
+                bijlage/annex X  soorten die zijn opgenomen in bijlage A maar waar zóveel in gevangenschap worden gefokt dat er vrijwel geen wilde exemplaren meer worden verhandeld.
+
+                ---
+
+                Er is een internationale CITES-indeling en een Europese CITES-indeling:
+
+                Internationaal: Appendix I, II, III
+                Europees: Bijlage A, B, C, D
+
+                Deze indelingen zijn als volgt met elkaar te vergelijken:
+
+                Appendix I – Bijlage A: soorten die met uitsterven worden bedreigd
+                Appendix II – Bijlage B: Soorten die bedreigd raken als er ongecontroleerde handel plaatsvindt
+                Appendix III – Bijlage C: Soorten die alleen in bepaalde landen beschermd zijn tegen ongecontroleerde handel
+                Bijlage D: Soorten waarvan Europa vindt dat ze mogelijk ooit bedreigd raken en extra beschermd moeten worden
+        -->
+        <div class="form-group form-group-sm">
+            <label class="col-sm-3 control-label">Standaard ter adoptie</label>
+            <div class="col-sm-1">
+                <div class="checkbox">
+                    <label>
+                        <input id="default_for_adoption"
+                               type="checkbox"
+                               ng-model="animal.default_for_adoption"
+                               ng-true-value="1"
+                               ng-false-value="0"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-3 control-label">Om 17:00 uur voederen</label>
+            <div class="col-sm-1">
+                <div class="checkbox">
+                    <label>
+                        <input id="eats_at_night"
+                               type="checkbox"
+                               ng-model="animal.eats_at_night"
+                               ng-true-value="1"
+                               ng-false-value="0"/>
+                    </label>
+                </div>
+            </div>
+
+            <label class="col-sm-3 control-label">Klaarmaken</label>
+            <div class="col-sm-4">
+                <select class="form-control"
+                        ng-model="animal.food_prepare_category"
+                        ng-options="category.id as category.name for category in prepareCategories | orderBy : 'name'">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-if="!appform.$pristine"
+            class="btn nhc-btn" ng-click="ok()">Bewaren</button>
+    <button class="btn nhc-btn" ng-click="cancel()">Annuleren</button>
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-xs-12">
+    <br/>
+    <button type="button" class="btn btn-success pull-right" (click)="onClickChangeNumberOfContainers()">Verander aantal bakken
+    </button>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-responsive table-bordered">
+      <thead>
+      <tr>
+        <th>Baknummer</th>
+        <th>Voorkant</th>
+        <th>Achterkant</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let container of containers">
+        <td>{{container.number}}</td>
+        <ng-container *ngIf="container.hospitalizations != null && (container.hospitalizations?.length > 1 || (container.hospitalizations.length > 0 && container.hospitalizations[0].hedgehog_container_division > 1))">
+          <td class="hospitalizationCell">{{container.hospitalizations[0].hedgehog_container_division == 2 ? container.hospitalizations[0].hospitalization : ''}}</td>
+          <td class="hospitalizationCell">{{container.hospitalizations[0].hedgehog_container_division == 3 ? container.hospitalizations[0].hospitalization : (container.hospitalizations.length == 2 ? container.hospitalizations[1].hospitalization : '')}}</td>
+        </ng-container>
+        <td colspan="2" class="text-center hospitalizationCell" *ngIf="container.hospitalizations == null || container.hospitalizations?.length < 2 && (container.hospitalizations?.length == 0 || container.hospitalizations[0].hedgehog_container_division == 1)">{{container.hospitalizations?.length == 1 ? container.hospitalizations[0].hospitalization : ''}}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="onClickEditContainer(container)"><i
+            class="fa fa-pencil"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

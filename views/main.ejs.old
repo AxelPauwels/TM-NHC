@@ -1,0 +1,6 @@
+<!-- views/main.ejs -->
+<nhc-app-window>
+	<div class="nhc-container container-fluid">
+		<ng-view></ng-view>
+	</div>
+</nhc-app-window>

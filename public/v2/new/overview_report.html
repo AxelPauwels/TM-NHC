@@ -1,0 +1,75 @@
+<nhc-force-security-reset></nhc-force-security-reset>
+<h3 class="form-horizontal-header">Overzichtsrapport</h3>
+
+<form role="form" class="form-horizontal">
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-1 control-label">Opname periode</label>
+        <div class="col-sm-2">
+            <nhc-date-picker nhc-date="startDate"
+                             init-date="today"
+                             max-date="endDate">
+            </nhc-date-picker>
+        </div>
+        <div class="col-sm-2">
+            <nhc-date-picker nhc-date="endDate"
+                             init-date="today"
+                             min-date="startDate">
+            </nhc-date-picker>
+        </div>
+        <div class="col-sm-1 nhc-clickable"
+             ng-disabled="!startDate || !endDate"
+             ng-click="getReport($event)">
+            <label class="command-icon fa fa-file-text fa-fw"
+                   aria-hidden="true"></label>
+        </div>
+
+        <div class="col-sm-offset-1 col-sm-3">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="control-label fa fa-search"></span>
+                </div>
+                <input id="searchField"
+                       class="form-control"
+                       type="text"
+                       ng-model="searchValue"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <label class="control-label col-sm-2">Totaal dieren (fiches):
+            {{(total.animal_count || 0) + ' (' + (total.fiche_count || 0) + ')'}}</label>
+    </div>
+
+    <scrollable-table watch="appData" style="height: 510px">
+        <table class="table table-condensed table-row-grouping">
+            <thead>
+            <tr>
+                <th>Diersoort</th>
+                <th>Opname reden</th>
+                <th>Status</th>
+                <th>Aantal dieren</th>
+                <th>Aantal fiches</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-class="{'row-group-start': $first || filtered_data[$index - 1].name !== item.name}"
+                ng-repeat="item in overviewData | filter : searchValue | orderBy : ['name', 'exit_reason'] as filtered_data track by $index">
+                <td class="flex-container"
+                    ng-if="$first || filtered_data[$index - 1].name !== item.name">
+                    <span class="col-sm-8 col-container"
+                          ng-bind="item.name"></span>
+                </td>
+                <td ng-if="!$first && filtered_data[$index - 1].name === item.name">
+                    <span class="col-sm-offset-1 fa fa-reply fa-rotate-180"></span>
+                </td>
+                <td ng-bind="item.entrance_reason"></td>
+                <td ng-bind="item.exit_reason"></td>
+                <td ng-bind="item.animal_count"></td>
+                <td ng-bind="item.fiche_count"></td>
+            </tr>
+            </tbody>
+        </table>
+    </scrollable-table>
+</form>

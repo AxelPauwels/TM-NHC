@@ -1,0 +1,59 @@
+/* latin */
+@font-face {
+  font-family: 'Gloria Hallelujah';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Gloria Hallelujah'), local('GloriaHallelujah'), url(/fonts/gloria_hallelujah.woff2) format('woff2'), url(/fonts/gloria_hallelujah.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+  font-family: 'Pompiere';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pompiere '), local('Pompiere-Regular'), url(/fonts/pompiere.woff2) format('woff2'), url(/fonts/pompiere.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url(/fonts/open_sans_condensed.woff2) format('woff2'), url(/fonts/open_sans_condensed.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Sue Ellen Francisco';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sue Ellen Francisco '), local('SueEllenFrancisco'), url(/fonts/sue_ellen_francisco.woff2) format('woff2'), url(/fonts/sue_ellen_francisco.woff) format('woff');
+}
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans'), url(/fonts/droid_sans.woff2) format('woff2'), url(/fonts/droid_sans.woff) format('woff');
+}
+@font-face {
+  font-family: 'Kalam';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Kalam Light'), local('Kalam-Light'), url(/fonts/kalam.woff2) format('woff2'), url(/fonts/kalam.woff) format('woff');
+}
+@font-face {
+  font-family: 'Crafty Girls';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Crafty Girls'), local('CraftyGirls'), url(/fonts/crafty_girls.woff2) format('woff2'), url(/fonts/crafty_girls.woff) format('woff');
+}
+@font-face {
+  font-family: 'Laila';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Laila'), local('Laila-Regular'), url(/fonts/laila.woff2) format('woff2'), url(/fonts/laila.woff) format('woff');
+}
+@font-face {
+  font-family: 'Rambla';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rambla'), local('Rambla-Regular'), url(/fonts/rambla.woff2) format('woff2'), url(/fonts/rambla.woff) format('woff');
+}

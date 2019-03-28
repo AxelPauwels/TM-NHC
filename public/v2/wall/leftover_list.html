@@ -1,0 +1,47 @@
+<nhc-force-security-reset></nhc-force-security-reset>
+<h3 class="form-horizontal-header">Voedselresten</h3>
+
+<form role="form"
+      class="form-horizontal">
+
+    <ng-include src="'/v2/wall/leftover_heading.html'"></ng-include>
+
+    <scrollable-table ng-class="'col-sm-10'"
+                      watch="appData"
+                      ng-if="dayLabels"
+                      ng-style="{'height': '550px'}">
+
+        <ng-include src="'/v2/wall/leftover_content.html'"></ng-include>
+    </scrollable-table>
+
+    <div ng-class="'col-sm-2'">
+        <button ng-if="leftoverLoggingCages.length"
+                ng-hide="hideAddButton"
+                class="btn nhc-btn"
+                ng-click="create($event)">Kooi toevoegen
+        </button>
+
+        <div ng-if="leftoverLoggingFoods.length"
+             class="vertical-flex-container"
+             ng-style="{'height': '510px'}">
+            <h4>Te registreren voeder-producten:</h4>
+            <ul class="fa-ul">
+                <li ng-repeat="food in leftoverLoggingFoods | orderBy : ['name'] track by $index">
+                    <h6>
+                        <span class="fa fa-li fa-caret-right"></span>
+                        <span ng-bind="food.name"></span>
+                    </h6>
+                </li>
+            </ul>
+            <ul class="fa-ul">
+                <li>
+                    <h5>
+                        <span class="fa fa-li fa-exclamation-circle"></span>
+                        <span>Per kooi, totale aantallen opgeteld.</span>
+                    </h5>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,55 @@
+.jum {
+    min-width: 100% !important;
+}
+
+.tableScroll {
+    height: 60vh;
+    overflow: auto;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #7e7783;
+    cursor: pointer;
+}
+
+#searchTerm {
+  margin-left: 15px;
+  width: 200px;
+}
+
+/*form - placeholder color*/
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--off-white);
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  color: var(--off-white);
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  color: var(--off-white);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: var(--off-white);
+}
+
+/*td {*/
+/*max-width: 40px;*/
+/*}*/
+
+/*th {*/
+/*max-width: 40px;*/
+/*}*/
+
+/*table col[class*=col-] {*/
+/*position: static;*/
+/*display: table-column;*/
+/*float: none*/
+/*}*/
+
+/*table td[class*=col-], table th[class*=col-] {*/
+/*position: static;*/
+/*display: table-cell;*/
+/*float: none*/
+/*}*/

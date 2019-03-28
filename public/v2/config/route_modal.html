@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h3 class="form-horizontal-header">Route&nbsp;<span
+            ng-if="!appform.$pristine"
+            class="fa fa-pencil"></span></h3>
+</div>
+
+<div class="modal-body">
+    <form name="appform"
+          role="form"
+          class="form-horizontal">
+        <div class="form-group form-group-sm">
+            <label for="id"
+                   class="col-sm-4 control-label">Systeem
+                ID</label>
+
+            <div class="col-sm-2">
+                <div id="id"
+                     class="form-control-static"
+                     ng-bind="route.id">
+                </div>
+            </div>
+
+            <div class="col-sm-3 control-label">
+                <span ng-bind="route.name"
+                      ng-style="{color: route.color}"
+                      class="nhc-cage-label nhc-cage-header">
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Naam</label>
+            <div class="col-sm-5">
+                <input id="image"
+                       class="form-control"
+                       ng-model="route.name"
+                       ng-virtual-keyboard/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-4 control-label">Kleur</label>
+            <div class="col-sm-2">
+                <input type="color" spectrum-colorpicker
+                       options="colorPickerOptions"
+                       ng-model="route.color"/>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-if="!appform.$pristine"
+            class="btn nhc-btn" ng-click="ok()">Bewaren
+    </button>
+    <button class="btn nhc-btn" ng-click="cancel()">Annuleren</button>
+</div>

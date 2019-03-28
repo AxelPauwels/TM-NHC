@@ -1,0 +1,52 @@
+@import '~angular-calendar/css/angular-calendar.css';
+
+.calendar{
+  color: black;
+  background-color: rgba(var(--off-white-r), var(--off-white-g), var(--off-white-b), .95);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 150px;
+}
+
+.cal-event-title{
+  color: black;
+  font-size: 18px;
+}
+
+.cal-event{
+  margin: 2px;
+}
+
+/* volledige week hover */
+.cal-month-view .cal-cell-row:hover {
+  background-color: inherit; }
+
+/* dag hover */
+.cal-month-view .cal-cell-row .cal-cell:hover,
+.cal-month-view .cal-cell.cal-has-events.cal-open {
+  background-color: #eab26e; }
+
+/* vandaag */
+.cal-month-view .cal-day-cell.cal-today {
+  background-color: #e8c294; }
+
+/* DatePicker */
+.selection{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.btnpickerenabled{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.btnclearenabled{
+  color: #ffffe7 !important;
+  background-color: #b57423 !important;
+}
+
+.mydp{
+  border: 1px solid black !important;
+  background-color: #b57423 !important;
+}
